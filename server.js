@@ -24,6 +24,12 @@ server.listen(3000, function() {
 	console.log("Server listening on port 3000.");
 });
 
+/**
+ * Load custom Node functionality, and
+ * Starts the socket.io server functionality (provide  the server so it can share the same tcp/ip port)
+ */
+var chatServer = require('./lib/chat_server');
+chatServer.listen(server);
 
 /**
  * 404 response
