@@ -29,7 +29,7 @@ function processUserInput(chatApp, socket) {
 	} else {
 		// Broadcast noncommand input to other users
 		chatApp.sendMessage($('#room').text(), message);
-		$('#messages').append(divEscapedContentElement(message));
+		$('#messages').append(divEscapedContentElement("Me: " + message));
 		$('#messages').scrollTop($('#messages').prop('scrollHeight'));
 	}
 	
