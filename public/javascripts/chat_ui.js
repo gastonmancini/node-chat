@@ -79,7 +79,7 @@ $(document).ready(function() {
 		
 		// Allow click a room name to change to that chatroom
 		$('#room-list div').click( function () {
-			chatApp.processCommand('/join' + $(this).text());
+			chatApp.processCommand('/join ' + $(this).text());
 			$('#send-message').focus();
 		});
 	});
