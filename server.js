@@ -5,33 +5,6 @@ var mime = require('mime');
 var cache = {};
 
 /**
- * Create server
- */
-var server = http.createServer(function(request, response) {
-	var filePath = false;
-	
-	if (request.url == '/') {
-		filePath = 'public/index.html';
-	} else {
-		filePath = 'public' + request.url;
-	}
-	
-	var absPath = './' + filePath;
-	serveStatic(response, cache, absPath);
-});
-
-server.listen(3000, function() {
-	console.log("Server listening on port 3000.");
-});
-
-/**
- * Load custom Node functionality, and
- * Starts the socket.io server functionality (provide  the server so it can share the same tcp/ip port)
- */
-var chatServer = require('./lib/chat_server');
-chatServer.listen(server);
-
-/**
  * 404 response
  */
 function send404(response) {
@@ -44,7 +17,10 @@ function send404(response) {
  * Retrieve a specific file
  */
 function sendFile(response, filePath, fileContents) {
-	response.writeHead(200, {"content-type": mime.lookup(path.basename(filePath))});
+	response.writeHead(
+	    200, 
+	    {"content-type": mime.lookup(path.basename(filePath))}
+	);
 	response.end(fileContents);
 }
 
@@ -71,3 +47,31 @@ function serveStatic(response, cache, absPath) {
 		});
 	}
 }
+
+/**
+ * Create server
+ */
+var server = http.createServer(function(request, response) {
+	var filePath = false;
+	
+	if (request.url == '/') {
+		filePath = 'public/index.html';
+	} else {
+		filePath = 'public' + request.url;
+	}
+	
+	var absPath = './' + filePath;
+	serveStatic(response, cache, absPath);
+});
+
+server.listen(3000, function() {
+	console.log("Server listening on port 3000.");
+});
+
+/**
+ * Load custom Node functionality, and
+ * Starts the socket.io server functionality (provide  the server so it can share the same tcp/ip port)
+ */
+var chatServer = require('./lib/chat_server');
+chatServer.listen(server);
+
