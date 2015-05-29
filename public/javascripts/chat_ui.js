@@ -17,7 +17,7 @@ function divSystemContentElement(message) {
  * Process user input
  */
 function processUserInput(chatApp, socket) {
-	var message = $('#send-message').var();
+	var message = $('#send-message').val();
 	var systemMessage;
 	
 	// If user input begins with slash, treat it as command

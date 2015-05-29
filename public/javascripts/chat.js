@@ -19,7 +19,7 @@ Chat.prototype.changeRoom = function(room) {
 }
 
 // Processing chat commands
-Chat.prototype.processCommands = function(command) {
+Chat.prototype.processCommand = function(command) {
 	var words = command.split(' ');
 	// Parse command from first word
 	var command = words[0]
