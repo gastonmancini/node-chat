@@ -14,6 +14,15 @@ function send404(response) {
 }
 
 /**
+ * 500 response
+ */
+function send500(response) {
+	response.writeHead(500, {'Content-Type': 'text/plain'});
+	response.write('Error 500: Internal Server Error.');
+	response.end();
+}
+
+/**
  * Retrieve a specific file
  */
 function sendFile(response, filePath, fileContents) {
@@ -35,7 +44,7 @@ function serveStatic(response, cache, absPath) {
 			if (exists) {
 				fs.readFile(absPath, function(err, data) {
 					if (err) {
-						send404(response);		
+						send500(response);		
 					} else {
 						cache[absPath] = data;	
 						sendFile(response, absPath, data);
