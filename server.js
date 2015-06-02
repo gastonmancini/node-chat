@@ -5,24 +5,6 @@ var common = require('./lib/foundation/common');
 var chatService = require('./lib/services/chat_service');
 
 /**
- * 404 response
- */
-function send404(response) {
-	response.writeHead(404, {'Content-Type': 'text/plain'});
-	response.write('Error 404: resource not found.');
-	response.end();
-}
-
-/**
- * 500 response
- */
-function send500(response) {
-	response.writeHead(500, {'Content-Type': 'text/plain'});
-	response.write('Error 500: Internal Server Error.');
-	response.end();
-}
-
-/**
  * Serve static assets
  */
 app.use(express.static(__dirname + '/public'));
