@@ -1,7 +1,7 @@
 {
-	"name": "chatrooms",
-	"version": "0.0.1",
-	"description": "Minimalist multiroom chat server",
+	"name": "node-chat-tio",
+	"version": "0.2",
+	"description": "Multiroom chat server + API",
 	"dependencies": {
 		"socket.io": "~0.9.6",
 		"mime": "~1.2.7",
