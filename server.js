@@ -3,6 +3,7 @@ var app = express();
 var http = require('http').Server(app);
 var chatArchive = require('./lib/chat_archive');
 var common = require('./lib/foundation/common');
+var chatArchiveRoute = require('./routes/chat_archive');
 
 /**
  * 404 response
@@ -28,15 +29,26 @@ function send500(response) {
 app.use(express.static(__dirname + '/public'));
 
 /**
+ * Set views and template engine
+ */
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+
+/**
  * Chat endpoint
  */
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 });
 
+/**
+ * Chat history for room View (render html)
+ */
+app.get('/archive/:room', chatArchiveRoute.list);
+
 
 /**
- * Chat history for room 
+ * Chat history for room API (returns json)
  */
 app.get('/api/archive/:room', function(req, res){
 	

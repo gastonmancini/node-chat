@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title><%= title %></title>
+		<link rel='stylesheet' href='/stylesheets/style.css' />
+	</head>
+	<body>
+		<h1>Chat History</h1>
+		<p>Express chat server application.</p>
+		<h2>RoomName: <%=roomName%></h2>
+		<div id="chatLines">
+			<p>Creation date | User | Message </p>
+			<% chatLines.forEach(function(chatLine) { %>
+				<p><%=chatLine.serverDateTime%> | <%=chatLine.nickName%> | <%=chatLine.message%></p>
+			<% }) %>
+		</div>
+	</body>
+</html>
