@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var common = require('./lib/foundation/common');
-var chatService = require('./lib/services/chat_service');
+var chatService = require('./lib/services/chatService');
 
 /**
  * Serve static assets
@@ -25,13 +25,13 @@ app.get('/', function(req, res){
 /**
  * Chat history for room View (render html)
  */
-app.get('/archive/:room', chatService.list);
+app.get('/history/:room', chatService.list);
 
 
 /**
  * Chat history for room API (returns json)
  */
-app.get('/api/archive/:room', chatService.listAsJson);
+app.get('/api/history/:room', chatService.listAsJson);
 
 http.listen(common.listenPort(), function () {
 	console.log('Listening...');
@@ -41,6 +41,6 @@ http.listen(common.listenPort(), function () {
  * Load custom Node functionality, and
  * Starts the socket.io server functionality (provide  the server so it can share the same tcp/ip port)
  */
-var chatServer = require('./lib/chat_server');
+var chatServer = require('./lib/chatServer');
 chatServer.listen(http);
 
