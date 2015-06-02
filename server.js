@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var chatArchive = require('./lib/chat_archive');
+var common = require('./lib/foundation/common');
 
 /**
  * 404 response
@@ -65,9 +66,7 @@ app.get('/archive/:room', function(req, res){
 	
 });
 
-http.listen(process.env.PORT || 3000, function(){
-  console.log('listening on *:3000');
-});
+http.listen(common.listenPort());
 
 /**
  * Load custom Node functionality, and
