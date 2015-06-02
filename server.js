@@ -38,7 +38,7 @@ app.get('/', function(req, res){
 /**
  * Chat history for room 
  */
-app.get('/archive/:room', function(req, res){
+app.get('/api/archive/:room', function(req, res){
 	
 	var roomName = req.params.room; 
 	
@@ -46,22 +46,12 @@ app.get('/archive/:room', function(req, res){
 		send404(res);
 	}
 	
-	chatArchive.getChatLines(roomName, function(err, chatLines) {
-		
+	chatArchive.getChatLines(roomName, function(err, chatLines) {		
 		if (err) { 
 			send500(res); 
-		}
-		
-		var lines = "";
-		for (var i = 0; i < chatLines.length; i++) {
-				lines = lines + " \n " + chatLines[i].toString();
-		}
-		
-		res.end("------------------------------------------------------------" + "\n" +
-				"------------------------Chat History------------------------" + "\n" +
-				"------------------------------------------------------------" + "\n" +
-				" Room  |       Created Time       |  Nick  |  Message " + "\n" +
-		 		lines);
+		}		
+		res.setHeader('Content-Type', 'application/json');		
+		res.end(JSON.stringify(chatLines));
 	});
 	
 });
