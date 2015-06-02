@@ -66,7 +66,9 @@ app.get('/archive/:room', function(req, res){
 	
 });
 
-http.listen(common.listenPort());
+http.listen(common.listenPort(), function () {
+	console.log('Listening...');
+});
 
 /**
  * Load custom Node functionality, and
