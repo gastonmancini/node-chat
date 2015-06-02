@@ -1,15 +1,8 @@
-/**
- * Used for displaying untrusted text.
- * Sanitize text by transforming special chars into html entities.
- */
-function divEscapedContentElement(message) {
+function divSystemContentElement(message) {
 	return $('<div></div>').text(message);
 }
 
-/**
- * Display trusted content created by system rather than by other users.
- */
-function divSystemContentElement(message) {
+function divEscapedContentElement(message) {
 	return $('<div></div>').html('<i>' + message + '</i>');
 }
 
@@ -57,6 +50,7 @@ $(document).ready(function() {
 	// Display results of a room change
 	socket.on('joinResult', function (result) {
 		$('#room').text(result.room);
+		$('#messages').empty();
 		$('#messages').append(divSystemContentElement('Room changed.'));
 	});
 	
@@ -73,13 +67,15 @@ $(document).ready(function() {
 		for (var room in rooms) {
 			room = room.substring(1, room.length);
 			if (room != '') {
-				$('#room-list').append(divEscapedContentElement(room));
+				$('#room-list').append($('<option></option>').text(room));
 			}
 		}
 		
 		// Allow click a room name to change to that chatroom
-		$('#room-list div').click( function () {
+		$('#room-list option').click( function () {
 			chatApp.processCommand('/join ' + $(this).text());
+			$('#messages').empty();
+			$('#messages').append(divSystemContentElement('Room changed.'));
 			$('#send-message').focus();
 		});
 	});
