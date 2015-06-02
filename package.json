@@ -1,13 +1,16 @@
 {
 	"name": "node-chat-tio",
 	"version": "0.2.0",
-	"description": "Multiroom chat server + API",
+	"description": "A multiroom chat server + API",
 	"dependencies": {
 		"socket.io": "~0.9.6",
-		"mime": "~1.2.7",
-		"mongoose": "^4.0.4",
-		"express": "^4.12.4",
-		"bootstrap": "^3.3.4",
-		"ejs": "^2.3.1"
+		"mime": "1.2.7",
+		"mongoose": "4.0.4",
+		"express": "4.12.4",
+		"ejs": "2.3.1",
+		"bower": "1.4.1"
+	},
+	"scripts": {
+		"postinstall": "bower install"
 	}
 }

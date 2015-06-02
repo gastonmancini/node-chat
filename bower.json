@@ -1,0 +1,13 @@
+{
+    "name": "node-chat-tio",
+    "version": "0.2.0",
+    "homepage": "https://github.com/gastonmancini/node-chat",
+    "authors": [
+        "Gaston Mancini"
+    ],
+    "description":"A multiroom chat server + API",
+    "license": "MIT",
+    "dependencies": {
+        "bootstrap": "3.3.4"
+    }
+}
