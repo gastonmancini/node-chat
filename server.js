@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
+var chatArchive = require('./lib/chat_archive');
 
 /**
  * 404 response
@@ -20,16 +21,49 @@ function send500(response) {
 	response.end();
 }
 
+/**
+ * Serve static assets
+ */
 app.use(express.static(__dirname + '/public'));
 
+/**
+ * Chat endpoint
+ */
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 });
 
-/*
-app.get('/archive', function(req, res){
-	console.log("test");
-});*/
+
+/**
+ * Chat history for room 
+ */
+app.get('/archive/:room', function(req, res){
+	
+	var roomName = req.params.room; 
+	
+	if (!roomName) {
+		send404(res);
+	}
+	
+	chatArchive.getChatLines(roomName, function(err, chatLines) {
+		
+		if (err) { 
+			send500(res); 
+		}
+		
+		var lines = "";
+		for (var i = 0; i < chatLines.length; i++) {
+				lines = lines + " \n " + chatLines[i].toString();
+		}
+		
+		res.end("------------------------------------------------------------" + "\n" +
+				"------------------------Chat History------------------------" + "\n" +
+				"------------------------------------------------------------" + "\n" +
+				" Room  |       Created Time       |  Nick  |  Message " + "\n" +
+		 		lines);
+	});
+	
+});
 
 http.listen(process.env.PORT || 3000, function(){
   console.log('listening on *:3000');
