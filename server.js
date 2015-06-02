@@ -1,9 +1,8 @@
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
-var chatArchive = require('./lib/chat_archive');
 var common = require('./lib/foundation/common');
-var chatArchiveRoute = require('./routes/chat_archive');
+var chatService = require('./lib/services/chat_service');
 
 /**
  * 404 response
@@ -44,29 +43,13 @@ app.get('/', function(req, res){
 /**
  * Chat history for room View (render html)
  */
-app.get('/archive/:room', chatArchiveRoute.list);
+app.get('/archive/:room', chatService.list);
 
 
 /**
  * Chat history for room API (returns json)
  */
-app.get('/api/archive/:room', function(req, res){
-	
-	var roomName = req.params.room; 
-	
-	if (!roomName) {
-		send404(res);
-	}
-	
-	chatArchive.getChatLines(roomName, function(err, chatLines) {		
-		if (err) { 
-			send500(res); 
-		}		
-		res.setHeader('Content-Type', 'application/json');		
-		res.end(JSON.stringify(chatLines));
-	});
-	
-});
+app.get('/api/archive/:room', chatService.listAsJson);
 
 http.listen(common.listenPort(), function () {
 	console.log('Listening...');
