@@ -9,8 +9,7 @@ function divEscapedContentElement(message) {
 /**
  * Process user input
  */
-function processUserInput(chatApp, socket) {
-	var message = $('#send-message').val();
+function processUserInput(chatApp, socket, message) {
 	var systemMessage;
 	
 	// If user input begins with slash, treat it as command
@@ -88,8 +87,14 @@ $(document).ready(function() {
 	
 	// Allow submitting the form to send a chat message
 	$('#send-form').submit(function () {
-		processUserInput(chatApp, socket);
+		processUserInput(chatApp, socket, $('#send-message').val());
 		return false;
 	});
+});
+
+$("#createNewChatroom").click(function() {
+	  var chatApp = new Chat(socket);
+	  processUserInput(chatApp, socket, "/join " + $('#inputChatRoomName').val());
+	  $('#myModal').modal('hide');
 });
 

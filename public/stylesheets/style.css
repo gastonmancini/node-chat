@@ -13,3 +13,7 @@
 h1 {
 	color: #337ab7;
 }
+
+#newchatroom {
+	float: right;
+}
