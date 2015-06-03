@@ -17,3 +17,7 @@ h1 {
 #newchatroom {
 	float: right;
 }
+
+#chatroomsdropdown {
+	margin-left: 16px;
+}
