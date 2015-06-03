@@ -7,21 +7,14 @@ var chatService = require('./lib/services/chatService');
 // Serve static assets
 app.use(express.static(__dirname + '/public'));
 
-// Set views and template engine
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
-
-// Chat Main UI
-app.get('/', function(req, res){
-	res.sendFile(__dirname + '/index.html');
+// Chatroom history
+app.get('/history', function(req, res){
+	res.sendFile(__dirname + '/public/chatRoomHistory.html');
 });
 
-// Chatroom history
-app.get('/history/:room', chatService.list);
-
-// API chatroom histpry endpoints
-app.get('/api/history/:room', chatService.listAsJson);
-app.get('/api/chatroom', chatService.chatRoomsAsJson);
+// API chatroom history endpoints
+app.get('/api/history/:room', chatService.getChatLines);
+app.get('/api/chatroom', chatService.getChatRooms);
 
 http.listen(common.listenPort(), function () {
 	console.log('Listening...');
