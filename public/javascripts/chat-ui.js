@@ -51,7 +51,7 @@ $(document).ready(function() {
 	socket.on('joinResult', function (result) {
 		$('#room').text(result.room);
 		$('#messages').empty();
-		$('#messages').append(divSystemContentElement('Room changed.'));
+		$('#messages').append(divSystemContentElement('You are now in the room ' + result.room));
 	});
 	
 	// Display received messages
