@@ -43,6 +43,6 @@ h1 {
   margin-top: 16px;
 }
 
-li + li::before {
+.footer li + li::before {
     content: " | ";
 }
