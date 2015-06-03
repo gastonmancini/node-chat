@@ -94,7 +94,26 @@ $(document).ready(function() {
 
 $("#createNewChatroom").click(function() {
 	  var chatApp = new Chat(socket);
-	  processUserInput(chatApp, socket, "/join " + $('#inputChatRoomName').val());
-	  $('#myModal').modal('hide');
+	  
+	  if (!$('#inputChatRoomName').val()) {
+		  $('#modal-input-chatname').addClass('has-error');
+		  $('#modal-input-chatname').addClass('has-feedback');
+		  $('#iconchangechatroomname').css('visibility', 'visible');
+		  
+	  } else {
+		 processUserInput(chatApp, socket, "/join " + $('#inputChatRoomName').val());
+	  	 $('#myModal').modal('hide');
+		 $('#modal-input-chatname').removeClass('has-error');
+		 $('#modal-input-chatname').removeClass('has-feedback');
+		 $('#iconchangechatroomname').css('visibility', 'hidden');
+		 $('#inputChatRoomName').val("");
+	  }
 });
 
+$("#divroomlist").tooltip({
+	placement : 'right',
+	title: 'Press to join a chatroom'});
+	
+$("#newchatroom").tooltip({
+	placement : 'right',
+	title: 'Create a new chatroom'});

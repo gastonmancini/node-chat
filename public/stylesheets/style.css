@@ -21,3 +21,12 @@ h1 {
 #chatroomsdropdown {
 	margin-left: 16px;
 }
+
+#gobacktothechat {
+	margin-top: 28px;
+  	float: right;
+}
+
+#iconchangechatroomname {
+	visibility: hidden;
+}
