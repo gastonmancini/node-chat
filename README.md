@@ -15,11 +15,11 @@ Uses [Angular.js](https://angularjs.org/) as a javascript mvw framework and [soc
 There are some available endpoints:
 
 - */api/chatrooms*: List the full history of chatrooms
-Parameters: None
-Response: A JSON object containing all the history of chatroom names.
+  - Parameters: None
+  - Response: A JSON object containing all the history of chatroom names.
 - */api/history/{chatRoomName}*: List the list of messages for the chatRoomName.
-Parameters: string
-Response: A JSON object containing the full list of messages in a given chatrooom.
+  - Parameters: string
+  - Response: A JSON object containing the full list of messages in a given chatrooom.
 
 Currently available in [heroku](http://chat-node-tio.herokuapp.com).
 
