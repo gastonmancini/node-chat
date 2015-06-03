@@ -21,6 +21,7 @@ app.get('/history/:room', chatService.list);
 
 // API chatroom histpry endpoints
 app.get('/api/history/:room', chatService.listAsJson);
+app.get('/api/chatroom', chatService.chatRoomsAsJson);
 
 http.listen(common.listenPort(), function () {
 	console.log('Listening...');
