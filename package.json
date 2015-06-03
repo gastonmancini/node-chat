@@ -7,7 +7,9 @@
 		"mime": "1.2.7",
 		"mongoose": "4.0.4",
 		"express": "4.12.4",
-		"bower": "1.4.1"
+		"bower": "1.4.1",
+		"passport": "0.2.2",
+		"passport-local": "1.0.0"
 	},
 	"scripts": {
 		"postinstall": "bower install"
