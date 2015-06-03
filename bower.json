@@ -8,6 +8,7 @@
     "description":"A multiroom chat server + API",
     "license": "MIT",
     "dependencies": {
-        "bootstrap": "3.3.4"
+        "bootstrap": "3.3.4",
+        "angular": "1.4.0"
     }
 }
