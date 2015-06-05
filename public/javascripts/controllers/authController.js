@@ -16,7 +16,7 @@ angular.module('chatApp.authController', ['ngRoute'])
             password: ''
       };
 
-      $scope.register = function (user) {
+      $scope.authenticate = function (user) {
             
       };
 
