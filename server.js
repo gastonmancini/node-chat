@@ -7,10 +7,15 @@ var mongo = require('./lib/models/bootstrap');
 var chatService = require('./lib/services/chatService');
 var userService = require('./lib/services/userService');
 var auth = require('./lib/foundation/auth');
+var passport = require('passport');
 
 // Middleware to parse the JSON body configure app to use bodyParser() this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+// Use passport session
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Serve static assets
 app.use(express.static(__dirname + '/public'));
