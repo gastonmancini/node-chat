@@ -46,3 +46,7 @@ h1 {
 .footer li + li::before {
     content: " | ";
 }
+
+.form-signup {
+	max-width: 330px;
+}

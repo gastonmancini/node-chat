@@ -4,12 +4,20 @@ var app = express();
 var http = require('http').Server(app);
 var common = require('./lib/foundation/common');
 var chatService = require('./lib/services/chatService');
+var userService = require('./lib/services/userService');
+
 // Middleware to parse the JSON body configure app to use bodyParser() this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Serve static assets
 app.use(express.static(__dirname + '/public'));
+
+// Register a user
+app.get('/register', function(req, res){
+	res.sendFile(__dirname + '/public/register.html');
+});
+app.post('/register', userService.createUser);
 
 // Chatroom history
 app.get('/history', function(req, res){
