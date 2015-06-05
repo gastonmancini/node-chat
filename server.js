@@ -1,8 +1,12 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 var http = require('http').Server(app);
 var common = require('./lib/foundation/common');
 var chatService = require('./lib/services/chatService');
+// Middleware to parse the JSON body configure app to use bodyParser() this will let us get the data from a POST
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // Serve static assets
 app.use(express.static(__dirname + '/public'));
