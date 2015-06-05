@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var app = express();
 var http = require('http').Server(app);
 var config = require('./lib/config/config');
+var mongo = require('./lib/models/bootstrap');
 var chatService = require('./lib/services/chatService');
 var userService = require('./lib/services/userService');
 var auth = require('./lib/foundation/auth');
