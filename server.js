@@ -15,24 +15,12 @@ app.use(bodyParser.json());
 // Serve static assets
 app.use(express.static(__dirname + '/public'));
 
-// Register a user
-app.get('/register', function(req, res){
-	res.sendFile(__dirname + '/public/register.html');
-});
-// User authentication
-app.get('/login', function(req, res){
-	res.sendFile(__dirname + '/public/login.html');
-})
+// API auth
 app.post('/users', userService.registerUser);
 app.get('/auth', auth.ensureAuthenticated, auth.session);
 app.post('/auth', auth.login);
 app.delete('/auth', auth.logout);
   
-// Chatroom history
-app.get('/history', function(req, res){
-	res.sendFile(__dirname + '/public/chatRoomHistory.html');
-});
-
 // API chatroom history endpoints
 app.get('/api/history/:room', chatService.getChatLines);
 app.get('/api/chatroom', chatService.getChatRooms);

@@ -1,0 +1,91 @@
+<div class="container" ng-controller="ChatController">
+	<div class="row">
+		<div id="title" class="col-md-12">
+			<h1>
+				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>Chat Server
+				<small>Node training</small>
+			</h1>
+		</div>
+	</div>
+	<div class="row alto">
+		<div class="col-md-8">
+			<div class="panel panel-primary">
+				<div class="panel-heading" id="room"></div>
+				<div class="panel-body" id="messages"></div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Chatrooms
+					<button id="newchatroom" type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+					</button>
+				</div>
+				<div class="panel-body" id="divroomlist">
+					<select multiple id='room-list' class="form-control"></select>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<form id='send-form'>
+			<div class="form-group col-md-10">
+				<input type="text" class="form-control" id='send-message' placeholder="Write something..." />
+			</div>
+			<div class="form-group col-md-2">
+				<button id='send-button' type="submit" class="btn btn-primary btn-block">Submit
+					<span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+				</button>
+			</div>
+		</form>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div id="help" class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>Chat commands</h3>
+				</div>
+				<div class="panel-body">
+					<p>Change nickname:
+						<i>/nick [username]</i>
+					</p>
+					<p>Join/create room:
+						<i>/join [room name]</i>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<a class="btn btn-default" href="/history/">Chat history 
+					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				</a>
+		</div>
+	</div>
+</div>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Create new chatroom</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group" id="modal-input-chatname">
+					<label class="control-label" for="inputChatRoomName">Chatroom name</label>
+					<input type="text" class="form-control" id="inputChatRoomName" placeholder="Enter name" required>
+					<span class="glyphicon glyphicon-remove form-control-feedback" id="iconchangechatroomname"></span>
+					<span id="inputChatRoomName" class="sr-only">The name cannot be empty</span>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button id="createNewChatroom" type="button" class="btn btn-default">Save</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>

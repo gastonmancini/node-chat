@@ -1,9 +1,17 @@
 'use strict';
 
-var app = angular.module('chatApp', []);
+angular.module('chatApp.chatHistoryController', ['ngRoute'])
 
+.config(['$routeProvider', function($routeProvider) {
+  $routeProvider.when('/history', {
+    templateUrl: '/views/chatHistory.html',
+    controller: 'ChatHistoryController'
+  });
+}])
 
-app.controller('ChatHistoryController', function ($scope, $http, $location) {
+.controller('ChatHistoryController', function ($scope, $http, $location) {
+   
+   console.log("ChatHistoryController");
    
     $scope.chatRoomName = "Lobby";
    

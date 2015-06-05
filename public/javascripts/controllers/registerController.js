@@ -1,8 +1,15 @@
 'use strict';
 
-var app = angular.module('chatApp', []);
+angular.module('chatApp.registerController', ['ngRoute'])
 
-app.controller('RegisterController', function ($scope, $http, $location) {
+.config(['$routeProvider', function($routeProvider) {
+  $routeProvider.when('/register', {
+    templateUrl: '/views/register.html',
+    controller: 'RegisterController'
+  });
+}])
+
+.controller('RegisterController', function ($scope, $http, $location) {
 
       $scope.user = {
             email: '',

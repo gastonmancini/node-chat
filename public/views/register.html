@@ -1,0 +1,27 @@
+<div class="container form-signup" ng-controller="RegisterController">
+	<div class="row">
+		<div id="title" class="col-md-12">
+			<h1>
+				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>SignUp
+				<small>Chat server</small>
+			</h1>
+		</div>
+	</div>
+	<div class="row">
+		<form name="form">
+			<div class="form-group">
+				<label for="inputEmail">Email address</label>
+				<input type="email" class="form-control" id="inputEmail" placeholder="Enter email" ng-model="user.email">
+			</div>
+			<div class="form-group">
+				<label for="inputUsername">Username</label>
+				<input type="text" class="form-control" id="inputUsername" placeholder="Username" ng-model="user.username">
+			</div>
+			<div class="form-group">
+				<label for="inputPassword">Password</label>
+				<input type="password" class="form-control" id="inputPassword" placeholder="Password" ng-model="user.password">
+			</div>
+			<button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="register(user)">Submit</button>
+		</form>
+	</div>
+</div>
