@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 var http = require('http').Server(app);
-var common = require('./lib/foundation/common');
+var config = require('./lib/config/config');
 var chatService = require('./lib/services/chatService');
 var userService = require('./lib/services/userService');
 
@@ -28,8 +28,8 @@ app.get('/history', function(req, res){
 app.get('/api/history/:room', chatService.getChatLines);
 app.get('/api/chatroom', chatService.getChatRooms);
 
-http.listen(common.listenPort(), function () {
-	console.log('Listening...');
+http.listen(config.port, function () {
+	console.log('Listening port:' + config.port);
 });
 
 /**
