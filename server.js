@@ -5,6 +5,7 @@ var http = require('http').Server(app);
 var config = require('./lib/config/config');
 var chatService = require('./lib/services/chatService');
 var userService = require('./lib/services/userService');
+var auth = require('./lib/foundation/auth');
 
 // Middleware to parse the JSON body configure app to use bodyParser() this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -17,8 +18,15 @@ app.use(express.static(__dirname + '/public'));
 app.get('/register', function(req, res){
 	res.sendFile(__dirname + '/public/register.html');
 });
-app.post('/register', userService.createUser);
-
+// User authentication
+app.get('/login', function(req, res){
+	res.sendFile(__dirname + '/public/login.html');
+})
+app.post('/users', userService.registerUser);
+app.get('/auth', auth.ensureAuthenticated, auth.session);
+app.post('/auth', auth.login);
+app.delete('/auth', auth.logout);
+  
 // Chatroom history
 app.get('/history', function(req, res){
 	res.sendFile(__dirname + '/public/chatRoomHistory.html');
