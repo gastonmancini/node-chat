@@ -1,13 +1,6 @@
 'use strict';
 
-angular.module('chatApp.chatHistoryController', ['ngRoute'])
-
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/history', {
-    templateUrl: '/views/chatHistory.html',
-    controller: 'ChatHistoryController'
-  });
-}])
+angular.module('chatApp')
 
 .controller('ChatHistoryController', function ($scope, $http, $location) {
    

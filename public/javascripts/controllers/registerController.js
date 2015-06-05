@@ -1,13 +1,6 @@
 'use strict';
 
-angular.module('chatApp.registerController', ['ngRoute'])
-
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/register', {
-    templateUrl: '/views/register.html',
-    controller: 'RegisterController'
-  });
-}])
+angular.module('chatApp')
 
 .controller('RegisterController', function ($scope, $http, $location) {
 
