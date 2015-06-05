@@ -13,13 +13,11 @@ app.config(['$routeProvider', function ($routeProvider) {
       .when('/chat', {
         templateUrl: '/views/chat.html',
         controller: 'ChatController'
-      })
-    
+      })   
       .when('/history', {
         templateUrl: '/views/chatHistory.html',
         controller: 'ChatHistoryController'
-      })
-    
+      })  
       .when('/register', {
         templateUrl: '/views/register.html',
         controller: 'RegisterController'
