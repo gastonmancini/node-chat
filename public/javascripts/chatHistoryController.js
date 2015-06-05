@@ -8,10 +8,7 @@ app.controller('ChatHistoryController', function ($scope, $http, $location) {
     $scope.chatRoomName = "Lobby";
    
     $http.get('/api/chatroom').success(function(data) {        
-        $scope.chatRooms = [];
-        $.each(data, function(index, chatRoom) {
-            $scope.chatRooms.push(chatRoom);
-        });        
+        $scope.chatRooms = data;
     });
     
     $http.get('/api/history/Lobby').success(function(data) {
@@ -25,10 +22,7 @@ app.controller('ChatHistoryController', function ($scope, $http, $location) {
     function getHistory(chatRoom) {
         $http.get('/api/history/' + chatRoom).success(function(data) {
             $scope.chatRoomName = chatRoom;
-            $scope.chatLines = [];
-            $.each(data, function(index, chatLine) {
-                $scope.chatLines.push(chatLine);
-            });         
+            $scope.chatLines = data;
         });    
     };
 });
