@@ -50,3 +50,7 @@ h1 {
 .form-signup {
 	max-width: 330px;
 }
+
+.header .navbar{
+	background-color: #d9edf7;
+}

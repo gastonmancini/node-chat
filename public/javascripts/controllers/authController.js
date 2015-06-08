@@ -9,6 +9,11 @@ angular.module('chatApp')
             email: '',
             password: ''
       };
+      
+      // Initialize login error message visibility
+      $scope.formregister = {
+            error: false
+      };
 
       // Authenticate
       $scope.authenticate = function (credentials) {
@@ -18,7 +23,8 @@ angular.module('chatApp')
                   $scope.setCurrentUser(user);
                   $location.path('/chat');
             }, function () {
-                     console.log("Login failed.");
+                      // Show the error
+                      $scope.formregister.error = true;   
             });
       };
 
