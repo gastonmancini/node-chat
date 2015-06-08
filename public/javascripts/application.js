@@ -7,7 +7,7 @@ var app = angular.module('chatApp', ['ngRoute']);
 app.config(['$routeProvider', '$locationProvider' , function ($routeProvider, $locationProvider) {
       
       // Remove the hash from url
-      $locationProvider.html5Mode(true);
+      // $locationProvider.html5Mode(true);
       
       $routeProvider
             .when('/login', {
