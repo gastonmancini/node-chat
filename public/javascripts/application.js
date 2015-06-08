@@ -4,8 +4,11 @@
 var app = angular.module('chatApp', ['ngRoute']);
 
 // Configure the application routes
-app.config(['$routeProvider', function ($routeProvider) {
-
+app.config(['$routeProvider', '$locationProvider' , function ($routeProvider, $locationProvider) {
+      
+      // Remove the hash from url
+      $locationProvider.html5Mode(true);
+      
       $routeProvider
             .when('/login', {
             templateUrl: '/views/login.html',
@@ -36,7 +39,7 @@ app.config(['$routeProvider', function ($routeProvider) {
             }
       })
 
-            .otherwise({ redirectTo: '/login' });
+      .otherwise({ redirectTo: '/login' });
 }]);
 
 // Check if the user is authenticated, and if not show the login page
