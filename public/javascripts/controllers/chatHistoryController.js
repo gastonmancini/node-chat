@@ -4,8 +4,6 @@ angular.module('chatApp')
 
 .controller('ChatHistoryController', function ($scope, $http, $location) {
    
-   console.log("ChatHistoryController");
-   
     $scope.chatRoomName = "Lobby";
    
     $http.get('/api/chatroom').success(function(data) {        

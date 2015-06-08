@@ -11,13 +11,16 @@
 		<form name="form">
 			<div class="form-group">
 				<label for="inputEmail">Email address</label>
-				<input type="email" class="form-control" id="inputEmail" placeholder="Enter email" ng-model="user.email">
+				<input type="email" class="form-control" id="inputEmail" placeholder="Enter email" ng-model="credentials.email">
 			</div>
 			<div class="form-group">
 				<label for="inputPassword">Password</label>
-				<input type="password" class="form-control" id="inputPassword" placeholder="Password" ng-model="user.password">
+				<input type="password" class="form-control" id="inputPassword" placeholder="Password" ng-model="credentials.password">
 			</div>
-			<button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="authenticate(user)">Submit</button>
+			
+			<button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="authenticate(credentials)">Submit</button>
+				
+			<a href="#/register" class="btn btn-default btn-lg btn-block" role="button">Create an account</a>
 		</form>
 	</div>
 </div>

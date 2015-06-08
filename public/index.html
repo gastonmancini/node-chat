@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="chatApp">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,7 +17,14 @@
 			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 	</head>
-	<body ng-app="chatApp">
+	<body ng-controller="ApplicationController">
+		
+		<nav class="navbar navbar-default navbar-static-top">
+		  <div class="container">
+			 <p ng-if="currentUser" class="navbar-text">Signed in as {{ currentUser.username }}</p>
+			 <button ng-if="currentUser" ng-click="logout()" type="button" class="btn btn-default navbar-btn">LogOut</button>
+		  </div>
+		</nav>
 		
 		<div class="container" ng-view></div>
 			
@@ -42,7 +49,8 @@
 			
 		<!-- AngularJs app & controllers -->
 		<script src="/javascripts/application.js"></script>
-			
+		<script src="/javascripts/services/authService.js"></script>
+		<script src="/javascripts/controllers/applicationController.js"></script>			
 		<script src="/javascripts/controllers/authController.js"></script>	
 		<script src="/javascripts/controllers/chatController.js"></script>
 		<script src="/javascripts/controllers/chatHistoryController.js"></script>
