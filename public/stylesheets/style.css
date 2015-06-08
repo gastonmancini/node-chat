@@ -54,3 +54,7 @@ h1 {
 .header .navbar{
 	background-color: #d9edf7;
 }
+
+.header-dropdown-option {
+	padding-left: 20px;
+}
