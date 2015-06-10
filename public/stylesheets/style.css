@@ -27,10 +27,6 @@ h1 {
   	float: right;
 }
 
-#iconchangechatroomname {
-	visibility: hidden;
-}
-
 .footer {
   position: fixed;
   bottom: 0;

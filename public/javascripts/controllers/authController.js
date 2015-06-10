@@ -1,8 +1,6 @@
 'use strict';
 
-angular.module('chatApp')
-
-      .controller('AuthController', function ($scope, $location, AuthService) {
+angular.module('chatApp').controller('AuthController', function ($scope, $location, AuthService) {
 
       // Initialize credentials
       $scope.credentials = {

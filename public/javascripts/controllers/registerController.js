@@ -1,8 +1,6 @@
 'use strict';
 
-angular.module('chatApp')
-
-.controller('RegisterController', function ($scope, $http, $location) {
+angular.module('chatApp').controller('RegisterController', function ($scope, $http, $location) {
 
       // Initialize the User
       $scope.user = {

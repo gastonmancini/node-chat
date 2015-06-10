@@ -1,10 +1,8 @@
 'use strict';
 
-angular.module('chatApp')
-
 // Create a new service for Auth. 
 // REMEMBER that all services in Angular are singletons (the injector caches the reference for all future needs)
-  .factory('AuthService', function ($http, $window) {
+angular.module('chatApp').factory('AuthService', function ($http, $window) {
 
       var authService = {};
      
