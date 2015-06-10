@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module
-var app = angular.module('chatApp', ['ngRoute']);
+var app = angular.module('chatApp', ['ngRoute', 'ngSanitize']);
 
 // Configure the application routes
 app.config(['$routeProvider', '$locationProvider' , function ($routeProvider, $locationProvider) {

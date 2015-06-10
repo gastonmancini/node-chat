@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('chatApp').controller('ChatController', function ($scope, $window, SocketService) {
+angular.module('chatApp').controller('ChatController', function ($scope, $window, $sce, SocketService) {
 
       $scope.messages = [];
       $scope.roomList = [];
@@ -64,22 +64,19 @@ angular.module('chatApp').controller('ChatController', function ($scope, $window
       
       // Create new chatroom
       $scope.createNewChatroom = function (room) {
-             if (!room) {
-		  /*$('#modal-input-chatname').addClass('has-error');
-		  $('#modal-input-chatname').addClass('has-feedback');
-		  $('#iconchangechatroomname').css('visibility', 'visible');*/
-               $scope.newRoomError = true;
-		  
-	  } else {
-		 processUserInput("/join " + room);
-	  	 $('#myModal').modal('hide');
-               /*
-		 $('#modal-input-chatname').removeClass('has-error');
-		 $('#modal-input-chatname').removeClass('has-feedback');
-		 $('#iconchangechatroomname').css('visibility', 'hidden');*/
-		 $scope.newRoomError = false;
-	  }
-      }
+            if (!room) {
+                  $scope.newRoomError = true;
+	      } else {
+      		 processUserInput("/join " + room);
+      	  	 $('#myModal').modal('hide');
+      		 $scope.newRoomError = false;
+      	}
+      };
+      
+      // Sanizite Html
+      $scope.sanitizeHtml = function(value) {
+        return $sce.trustAsHtml(value);
+      };
         
       /**
        * Private helpers
