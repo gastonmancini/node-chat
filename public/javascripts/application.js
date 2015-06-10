@@ -13,30 +13,22 @@ app.config(['$routeProvider', '$locationProvider' , function ($routeProvider, $l
             .when('/login', {
             templateUrl: '/views/login.html',
             controller: 'AuthController',
-            access: {
-                  requireLogin: false
-            }
+            auth: false
       })
             .when('/chat', {
             templateUrl: '/views/chat.html',
             controller: 'ChatController',
-            access: {
-                  requireLogin: true
-            }
+            auth: true
       })
             .when('/history', {
             templateUrl: '/views/chatHistory.html',
             controller: 'ChatHistoryController',
-            access: {
-                  requireLogin: true
-            }
+            auth: true
       })
             .when('/register', {
             templateUrl: '/views/register.html',
             controller: 'RegisterController',
-            access: {
-                  requireLogin: false
-            }
+            auth: false
       })
 
       .otherwise({ redirectTo: '/login' });
@@ -54,12 +46,10 @@ app.run(function ($location, $rootScope, AuthService) {
             }
       });
 
-       $rootScope.$on('$routeChangeStart', function (event, next) {
-            var requireLogin = next.access.requireLogin;
-
-            if (requireLogin && !$rootScope.currentUser) {
-                  event.preventDefault();
-                  $location.path('/login');
+       $rootScope.$on('$locationChangeStart', function (event, next, current) {
+            var requireLogin = next.auth;
+            if (requireLogin && !$rootScope.currentUser) { 
+                  AuthService.getCurrentUser();
             }
        });
             

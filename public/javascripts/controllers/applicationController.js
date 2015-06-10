@@ -6,7 +6,7 @@ angular.module('chatApp')
       .controller('ApplicationController', function ($scope, $rootScope, $location, AuthService) {
             
       // Initialize the current user in the app rootScope    
-      $rootScope.currentUser = null;
+      $rootScope.currentUser = AuthService.getCurrentUser();
        
       // Helper method for setting the user in the rootScope
       $scope.setCurrentUser = function (user) {
