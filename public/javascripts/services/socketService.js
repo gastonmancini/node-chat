@@ -1,8 +1,8 @@
-'use strict';
-
 // Create a new service for managing websockets with socketIo. 
 angular.module('chatApp').factory('SocketService', function ($rootScope) {
-
+      
+      'use strict';
+      
       var socketService = {};
 
       var socket = io.connect();

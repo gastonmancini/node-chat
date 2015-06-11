@@ -1,7 +1,7 @@
-'use strict';
-
 angular.module('chatApp').controller('ChatController', function ($scope, $window, $sce, SocketService) {
-
+      
+      'use strict';
+      
       $scope.messages = [];
       $scope.roomList = [];
       $scope.room = 'Lobby';
@@ -38,7 +38,7 @@ angular.module('chatApp').controller('ChatController', function ($scope, $window
             $scope.roomList = [];
           	for (var room in rooms) {
                 room = room.substring(1, room.length);
-                if (room != '') {
+                if (room !== '') {
                     $scope.roomList.push(room);
                 }
           	}
@@ -122,11 +122,11 @@ angular.module('chatApp').controller('ChatController', function ($scope, $window
       function processCommand(command) {
             var words = command.split(' ');
             // Parse command from first word
-            var command = words[0]
+            command = words[0]
                   .substring(1, words[0].length)
                   .toLowerCase();
             var message = false;
-
+  
             switch (command) {
                   case 'join':
                         words.shift();

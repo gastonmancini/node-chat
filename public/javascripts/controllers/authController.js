@@ -1,7 +1,7 @@
-'use strict';
-
 angular.module('chatApp').controller('AuthController', function ($scope, $location, AuthService) {
-
+      
+      'use strict';
+      
       // Initialize credentials
       $scope.credentials = {
             email: '',
@@ -17,7 +17,7 @@ angular.module('chatApp').controller('AuthController', function ($scope, $locati
       $scope.authenticate = function (credentials) {
             // Try to login and send the auth events on success and failure
             AuthService.login(credentials).then(function (user) {
-                  console.log("Login success.");
+                  // console.log("Login success.");
                   $scope.setCurrentUser(user);
                   $location.path('/chat');
             }, function () {
@@ -26,4 +26,4 @@ angular.module('chatApp').controller('AuthController', function ($scope, $locati
             });
       };
 
-});
+}); 

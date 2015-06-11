@@ -1,5 +1,8 @@
+(function(){
+    
 'use strict';
 
+    
 // Declare app level module
 var app = angular.module('chatApp', ['ngRoute', 'ngSanitize']);
 
@@ -54,3 +57,5 @@ app.run(function ($location, $rootScope, AuthService) {
        });
             
 });
+
+})();

@@ -1,7 +1,7 @@
-'use strict';
-
 angular.module('chatApp').controller('ChatHistoryController', function ($scope, $http, $location) {
-   
+    
+    'use strict';
+       
     $scope.chatRoomName = "Lobby";
    
     $http.get('/api/chatroom').success(function(data) {        
@@ -21,5 +21,5 @@ angular.module('chatApp').controller('ChatHistoryController', function ($scope, 
             $scope.chatRoomName = chatRoom;
             $scope.chatLines = data;
         });    
-    };
+    }
 });

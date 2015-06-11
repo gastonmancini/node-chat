@@ -1,8 +1,8 @@
-'use strict';
-
 // Container for the global application logic / Alternative to the Angular's run function
 angular.module('chatApp').controller('ApplicationController', function ($scope, $rootScope, $location, AuthService) {
-            
+      
+      'use strict';            
+      
       // Initialize the current user in the app rootScope    
       $rootScope.currentUser = AuthService.getCurrentUser();
        
@@ -15,11 +15,11 @@ angular.module('chatApp').controller('ApplicationController', function ($scope, 
       $scope.logout = function () {
             
             AuthService.logout().then(function () {
-                  console.log("Logout success.");
+                  // console.log("Logout success.");
             });
 
             $rootScope.currentUser = null;
             $location.path('/login');
             
       };
-});
+});     
