@@ -9,7 +9,7 @@ var del = require('del');
 
 var paths = {
     scriptsFrontend: [
-		'public/javascripts/**/*.js', 
+		'public/scripts/**/*.js', 
 		'!public/build/**/*.js'],
 	scriptsBackend: [
 		'gulpfile.js',
@@ -43,7 +43,7 @@ gulp.task('scripts', ['clean'], function() {
 		.pipe(uglify())
 		.pipe(concat('all.min.js'))
 		.pipe(sourcemaps.write())
-		.pipe(gulp.dest('public/build/javascripts'));
+		.pipe(gulp.dest('public/build/scripts'));
 });
 
 // Return the task when a file changes
