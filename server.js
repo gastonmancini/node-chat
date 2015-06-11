@@ -12,6 +12,8 @@ var expressSession = require('express-session');
 
 // Configure express
 app.use(express.static(__dirname + '/public'));
+app.use('/lib', express.static(__dirname + '/node_modules/'));
+
 app.use(cookieParser());
 app.use(expressSession({ secret: 'keyboard cat', cookie: { maxAge: 60000 }, resave: true, saveUninitialized: true }));
 

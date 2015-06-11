@@ -19,9 +19,11 @@
 		"gulp-uglify": "1.2.0",
 		"gulp-concat": "2.5.2",
 		"gulp-sourcemaps": "1.5.2",
-		"del": "1.2.0"
-	},
-	"scripts": {
-		"postinstall": "bower install"
+		"del": "1.2.0",
+		"bootstrap": "3.3.4",
+        "angular": "1.4.0",
+        "angular-route": "1.4.0",
+        "angular-sanitize": "1.4.0",
+		"jquery": "2.1.4"
 	}
 }
