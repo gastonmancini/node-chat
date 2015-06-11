@@ -11,9 +11,11 @@ gulp.task('lint', function () {
         .pipe(jshint( { 
 						"globals": {
 						    "angular": false,
-							"io": false,
-							"strinct": true
-						} 
+							"io": true,
+							"strict": true,
+							
+						},
+						"-W079": false // redefinition of 
 					   }))
         .pipe(jshint.reporter('default'));
 });
