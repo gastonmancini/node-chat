@@ -1,7 +1,9 @@
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var paths = {
-    scripts: ['gulpfile.js', 'public/javascripts/**/*.js']
+    scripts: ['gulpfile.js', 
+			  'public/javascripts/**/*.js',
+			  'lib/**/*.js']
 };
 
 gulp.task('lint', function () {
