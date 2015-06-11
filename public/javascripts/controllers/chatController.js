@@ -1,4 +1,4 @@
-angular.module('chatApp').controller('ChatController', function ($scope, $window, $sce, SocketService) {
+angular.module('chatApp').controller('ChatController', ['$scope', '$window', '$sce', 'SocketService', function ($scope, $window, $sce, SocketService) {
       
       'use strict';
       
@@ -149,4 +149,4 @@ angular.module('chatApp').controller('ChatController', function ($scope, $window
             return message;
       }
 
-});
+}]);

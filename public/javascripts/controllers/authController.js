@@ -1,4 +1,4 @@
-angular.module('chatApp').controller('AuthController', function ($scope, $location, AuthService) {
+angular.module('chatApp').controller('AuthController', ['$scope', '$location', 'AuthService', function ($scope, $location, AuthService) {
       
       'use strict';
       
@@ -26,4 +26,4 @@ angular.module('chatApp').controller('AuthController', function ($scope, $locati
             });
       };
 
-}); 
+}]); 

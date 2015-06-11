@@ -1,4 +1,4 @@
-angular.module('chatApp').controller('ChatHistoryController', function ($scope, $http, $location) {
+angular.module('chatApp').controller('ChatHistoryController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
     
     'use strict';
        
@@ -22,4 +22,4 @@ angular.module('chatApp').controller('ChatHistoryController', function ($scope, 
             $scope.chatLines = data;
         });    
     }
-});
+}]);

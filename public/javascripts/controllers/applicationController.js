@@ -1,5 +1,5 @@
 // Container for the global application logic / Alternative to the Angular's run function
-angular.module('chatApp').controller('ApplicationController', function ($scope, $rootScope, $location, AuthService) {
+angular.module('chatApp').controller('ApplicationController', ['$scope', '$rootScope', '$location', 'AuthService', function ($scope, $rootScope, $location, AuthService) {
       
       'use strict';            
       
@@ -22,4 +22,4 @@ angular.module('chatApp').controller('ApplicationController', function ($scope, 
             $location.path('/login');
             
       };
-});     
+}]); 

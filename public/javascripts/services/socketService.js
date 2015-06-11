@@ -1,5 +1,5 @@
 // Create a new service for managing websockets with socketIo. 
-angular.module('chatApp').factory('SocketService', function ($rootScope) {
+angular.module('chatApp').factory('SocketService', ['$rootScope', function ($rootScope) {
       
       'use strict';
       
@@ -28,4 +28,4 @@ angular.module('chatApp').factory('SocketService', function ($rootScope) {
       };
 
       return socketService;
-});
+}]);

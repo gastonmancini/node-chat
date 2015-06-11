@@ -38,7 +38,7 @@ app.config(['$routeProvider', '$locationProvider' , function ($routeProvider, $l
 }]);
 
 // Check if the user is authenticated, and if not show the login page
-app.run(function ($location, $rootScope, AuthService) {
+app.run(['$location', '$rootScope', 'AuthService', function ($location, $rootScope, AuthService) {
  
       // Watch the currentUser variable   
       $rootScope.$watch('currentUser', function (currentUser) {
@@ -56,6 +56,6 @@ app.run(function ($location, $rootScope, AuthService) {
             }
        });
             
-});
+}]);
 
 })();
