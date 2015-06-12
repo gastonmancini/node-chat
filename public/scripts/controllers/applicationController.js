@@ -1,25 +1,21 @@
 // Container for the global application logic / Alternative to the Angular's run function
-angular.module('chatApp').controller('ApplicationController', ['$scope', '$rootScope', '$location', 'AuthService', function ($scope, $rootScope, $location, AuthService) {
+angular.module('chatApp').controller('ApplicationController', ['$scope', '$location', 'AuthService', function ($scope, $location, AuthService) {
       
       'use strict';            
       
-      // Initialize the current user in the app rootScope    
-      $rootScope.currentUser = AuthService.getCurrentUser();
-       
-      // Helper method for setting the user in the rootScope
-      $scope.setCurrentUser = function (user) {
-            $rootScope.currentUser = user;
-      };
-        
+      var token = null;
+      var message = null;
+      
+      // Handle incoming response     
+      function handleRequest(res) {
+            token = res.data ? res.data.token : null;
+            if (token) { console.log('JWT:', token); }
+            message = res.data.message; 
+      }
+      
       // Logout from the chat
       $scope.logout = function () {
-            
-            AuthService.logout().then(function () {
-                  // console.log("Logout success.");
-            });
-
-            $rootScope.currentUser = null;
+            AuthService.logout();
             $location.path('/login');
-            
       };
-}]); 
+}]);  

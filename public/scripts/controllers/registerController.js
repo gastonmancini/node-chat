@@ -1,4 +1,4 @@
-angular.module('chatApp').controller('RegisterController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+angular.module('chatApp').controller('RegisterController', ['$scope', '$http', '$location', 'ApiBaseUrl', function ($scope, $http, $location, ApiBaseUrl) {
       
       'use strict';
       
@@ -17,10 +17,7 @@ angular.module('chatApp').controller('RegisterController', ['$scope', '$http', '
       // Register a new user
       $scope.register = function (user) {
             
-            $http.post('/users', { 'user': user },
-                  {
-                        headers: { 'Content-Type': 'application/json; charset=UTF-8' }
-                  })
+            $http.post(ApiBaseUrl + '/users', { 'user': user })
                   .success(function () {
                         // Redirect to the chat
                         $location.path('/');
