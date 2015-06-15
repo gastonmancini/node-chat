@@ -6,7 +6,7 @@ angular.module('chatApp').factory('AuthService', ['$http', '$window', 'ApiBaseUr
  
       // Save the token in the local storage
       authService.saveToken = function(token) {
-            $window.localStorage.jwtToken = JSON.stringify(token);
+            $window.localStorage.jwtToken = token;
       };
       
       // Retrieve the token in the local storage
@@ -21,23 +21,23 @@ angular.module('chatApp').factory('AuthService', ['$http', '$window', 'ApiBaseUr
       
       // Logout
       authService.logout = function () {
-            if (this.getToken()) {
-                  this.saveToken(null);
+            if (authService.getToken()) {
+                  $window.localStorage.removeItem('jwtToken');
             }
       };
       
       // Check if the user is authenticated
       authService.isAuthed = function () {
             
-            var token = this.getToken();
-            
-            console.log(token);
+            var token = authService.getToken();
             
             if (token) {
                   
-                  var params = parseJwtToken(token);
+                  var params = authService.parseToken(token);
+                  var dateNow = Math.round(new Date().getTime() / 1000);
                   
-                  return Math.round(new Date().getTime() / 1000) <= params.exp;
+                  // If the token has not expired
+                  return dateNow <= params.exp;
                   
             } else {
                   
@@ -47,11 +47,11 @@ angular.module('chatApp').factory('AuthService', ['$http', '$window', 'ApiBaseUr
       };
       
       // Parse the JSON Web Token
-      function parseJwtToken(token) {
+      authService.parseToken = function (token) {
             var base64Url = token.split('.')[1];
             var base64 = base64Url.replace('-','+').replace('_','/');
             return JSON.parse($window.atob(base64));
-      }
+      };
 
       return authService;
 }]);

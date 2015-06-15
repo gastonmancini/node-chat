@@ -9,8 +9,9 @@ angular.module('chatApp').controller('ChatHistoryController', ['$scope', '$http'
     });
     
     $http.get(ApiBaseUrl + '/history/Lobby').success(function(data) {
-        getHistory("Lobby");        
-    });    
+        $scope.chatRoomName = "Lobby";
+        $scope.chatLines = data;       
+    });
     
     $scope.reloadHistory = function (chatRoom) {
         getHistory(chatRoom);

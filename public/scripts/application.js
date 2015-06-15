@@ -42,25 +42,4 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($r
       .otherwise({ redirectTo: '/login' });
 }]);
 
-// Check if the user is authenticated, and if not show the login page
-app.run(['$location', '$rootScope', 'AuthService', function ($location, $rootScope, AuthService) {
- 
-      // Watch the currentUser variable   
-      /*$rootScope.$watch('currentUser', function (currentUser) {
-       
-            // If the user is not in the rootScope adn the page requires auth, try to get it
-            if (!$rootScope.currentUser && $location.path() != "/login" && $location.path() != "/register") {
-                  AuthService.getCurrentUser();
-            }
-      });*/
-
-       $rootScope.$on('$locationChangeStart', function (event, next, current) {
-            var requireLogin = next.auth;
-            if (requireLogin && !AuthService.isAuthed) { 
-                  $location.path('/login');
-            }
-       });
-            
-}]);
-
 })();

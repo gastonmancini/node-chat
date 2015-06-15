@@ -8,7 +8,7 @@ angular.module('chatApp').factory('AuthInterceptor', ['$q', '$injector', functio
 
                   var AuthService = $injector.get('AuthService');
                   var token = AuthService.getToken();
-
+                  
                   if (token) {
                         config.headers['x-access-token'] = token;
                   }
@@ -29,8 +29,6 @@ angular.module('chatApp').factory('AuthInterceptor', ['$q', '$injector', functio
                         AuthService.saveToken(token);
                   }
                   
-                  console.log(token);
-
                   return res;
             }
   };
