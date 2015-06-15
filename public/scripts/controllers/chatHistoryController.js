@@ -1,23 +1,24 @@
-angular.module('chatApp').controller('ChatHistoryController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+angular.module('chatApp').controller('ChatHistoryController', ['$scope', '$http', '$location', 'ApiBaseUrl', function ($scope, $http, $location, ApiBaseUrl) {
     
     'use strict';
        
     $scope.chatRoomName = "Lobby";
    
-    $http.get('/api/chatroom').success(function(data) {        
+    $http.get(ApiBaseUrl + '/chatroom').success(function(data) {        
         $scope.chatRooms = data;
     });
     
-    $http.get('/api/history/Lobby').success(function(data) {
-            getHistory("Lobby");        
-    });    
+    $http.get(ApiBaseUrl + '/history/Lobby').success(function(data) {
+        $scope.chatRoomName = "Lobby";
+        $scope.chatLines = data;       
+    });
     
     $scope.reloadHistory = function (chatRoom) {
         getHistory(chatRoom);
     };
     
     function getHistory(chatRoom) {
-        $http.get('/api/history/' + chatRoom).success(function(data) {
+        $http.get(ApiBaseUrl + '/history/' + chatRoom).success(function(data) {
             $scope.chatRoomName = chatRoom;
             $scope.chatLines = data;
         });    

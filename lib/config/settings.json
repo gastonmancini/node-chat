@@ -1,8 +1,10 @@
 {
   "development": {
+      "secret": "hellonewauth",
       "database_connection": "mongodb://localhost:27017/chathistory"
   }, 
   "production": {
+      "secret": "hellonewauth",
       "database_connection": "mongodb://nodechat:nodechat123@ds043002.mongolab.com:43002/chathistory"
   }
 }

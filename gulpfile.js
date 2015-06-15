@@ -6,6 +6,7 @@ var concat = require('gulp-concat');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
+var nodemon = require('gulp-nodemon');
 // Allows removal of files and dirs using globs -matching files using patterns.
 var del = require('del');
 
@@ -35,7 +36,7 @@ gulp.task('minify-css', function() {
 
 // Analyze JavaScript code
 gulp.task('lint', function () {
-    return gulp.src(paths.scriptsFrontend)
+    return gulp.src(paths.scriptsFrontend.concat(paths.scriptsBackend))
         .pipe(jshint( { 
 						"globals": {
 						    "angular": false,
@@ -63,9 +64,20 @@ gulp.task('scripts', ['clean'], function() {
 		.pipe(gulp.dest('public/build/scripts'));
 });
 
+// Restart service when a file change (nodemon)
+gulp.task('nodemon', function() {
+	nodemon({
+		script: 'server.js',
+		ext: 'html js',
+		tasks: ['lint'] })
+		.on('restart', function() {
+			console.log('Server auto-restarted!');
+		});
+});
+
 // Return the task when a file changes
 gulp.task('watch', function () {
-	gulp.watch(paths.scriptsBackend, ['lint']);
+	gulp.watch(paths.scriptsBackend, ['lint', 'nodemon']);
 	gulp.watch(paths.scriptsFrontend, ['lint', 'scripts']);
 	gulp.watch(paths.stylesheets, ['minify-css']);
 });

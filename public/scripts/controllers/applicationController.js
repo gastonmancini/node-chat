@@ -1,25 +1,32 @@
 // Container for the global application logic / Alternative to the Angular's run function
-angular.module('chatApp').controller('ApplicationController', ['$scope', '$rootScope', '$location', 'AuthService', function ($scope, $rootScope, $location, AuthService) {
+angular.module('chatApp').controller('ApplicationController', ['$scope', '$window', '$location', 'AuthService', function ($scope, $window, $location, AuthService) {
       
-      'use strict';            
+      'use strict';
       
-      // Initialize the current user in the app rootScope    
-      $rootScope.currentUser = AuthService.getCurrentUser();
-       
-      // Helper method for setting the user in the rootScope
-      $scope.setCurrentUser = function (user) {
-            $rootScope.currentUser = user;
+      // Store current user info
+      $scope.setCurrentUser = function(_id, email, username) {
+            var me = {
+                  _id: _id,
+                  username: username,
+                  email: email
+            }; 
+            $window.localStorage.setItem("currentUser", JSON.stringify(me));
       };
-        
+      
+      // Retrieve current user info
+      $scope.getCurrentUser = function() {
+            return JSON.parse($window.localStorage.getItem("currentUser"));
+      };
+      
+      // Check if the user is authenticated
+      $scope.isAuthed = function () {
+            return AuthService.isAuthed() !== null && AuthService.isAuthed() !== false;     
+      };
+      
       // Logout from the chat
       $scope.logout = function () {
-            
-            AuthService.logout().then(function () {
-                  // console.log("Logout success.");
-            });
-
-            $rootScope.currentUser = null;
+            AuthService.logout();
+            $window.localStorage.removeItem('currentUser');
             $location.path('/login');
-            
       };
-}]); 
+}]);  

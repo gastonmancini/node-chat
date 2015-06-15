@@ -1,42 +1,56 @@
-// Create a new service for Auth. 
-// REMEMBER that all services in Angular are singletons (the injector caches the reference for all future needs)
-angular.module('chatApp').factory('AuthService', ['$http', '$window', function ($http, $window) {
+angular.module('chatApp').factory('AuthService', ['$http', '$window', 'ApiBaseUrl', function ($http, $window, ApiBaseUrl) {
 
       'use strict';
 
       var authService = {};
-     
-      // API Login
+ 
+      // Save the token in the local storage
+      authService.saveToken = function(token) {
+            $window.localStorage.jwtToken = token;
+      };
+      
+      // Retrieve the token in the local storage
+      authService.getToken = function() {
+            return $window.localStorage.jwtToken;
+      };
+           
+      // Login - Make a request to the api for authenticating      
       authService.login = function (credentials) {
-            return $http
-                  .post('/auth', credentials,
-                  {
-                        headers: { 'Content-Type': 'application/json; charset=UTF-8' }
-                  })
-                  .then(function (res) {
-                  $window.localStorage.currentUser = JSON.stringify(res.data);
-                  return res.data;
-            });
+            return $http.post(ApiBaseUrl + '/authenticate', credentials);
       };
       
-      // API Logout
+      // Logout
       authService.logout = function () {
-            if ($window.localStorage.currentUser) {
-                  $window.localStorage.currentUser = null;
-                  return $http.delete('/auth');
+            if (authService.getToken()) {
+                  $window.localStorage.removeItem('jwtToken');
             }
       };
       
-      // Returns the current user. Try to get it from the session, and if it is not there then hit the api.
-      authService.getCurrentUser = function () {
-            if ($window.localStorage.currentUser) {
-                  return (JSON.parse($window.localStorage.currentUser));
+      // Check if the user is authenticated
+      authService.isAuthed = function () {
+            
+            var token = authService.getToken();
+            
+            if (token) {
+                  
+                  var params = authService.parseToken(token);
+                  var dateNow = Math.round(new Date().getTime() / 1000);
+                  
+                  // If the token has not expired
+                  return dateNow <= params.exp;
+                  
             } else {
-                  return $http.get('/auth').then(function(res) {
-                        $window.localStorage.currentUser = JSON.stringify(res.data);
-                        return res.data;
-                  });
+                  
+                  return false;
+                  
             }
+      };
+      
+      // Parse the JSON Web Token
+      authService.parseToken = function (token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace('-','+').replace('_','/');
+            return JSON.parse($window.atob(base64));
       };
 
       return authService;

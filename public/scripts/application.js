@@ -6,11 +6,16 @@
 // Declare app level module
 var app = angular.module('chatApp', ['ngRoute', 'ngSanitize']);
 
+// Define a constant with the API base url
+app.constant('ApiBaseUrl', 'http://localhost:3000/api');
+
 // Configure the application routes
-app.config(['$routeProvider', '$locationProvider' , function ($routeProvider, $locationProvider) {
+app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
       
       // Remove the hash from url
       // $locationProvider.html5Mode(true);
+      
+      $httpProvider.interceptors.push('AuthInterceptor');
       
       $routeProvider
             .when('/login', {
@@ -37,25 +42,19 @@ app.config(['$routeProvider', '$locationProvider' , function ($routeProvider, $l
       .otherwise({ redirectTo: '/login' });
 }]);
 
-// Check if the user is authenticated, and if not show the login page
-app.run(['$location', '$rootScope', 'AuthService', function ($location, $rootScope, AuthService) {
- 
-      // Watch the currentUser variable   
-      $rootScope.$watch('currentUser', function (currentUser) {
-       
-            // If the user is not in the rootScope adn the page requires auth, try to get it
-            if (!$rootScope.currentUser && $location.path() != "/login" && $location.path() != "/register") {
-                  AuthService.getCurrentUser();
-            }
-      });
-
-       $rootScope.$on('$locationChangeStart', function (event, next, current) {
-            var requireLogin = next.auth;
-            if (requireLogin && !$rootScope.currentUser) { 
-                  AuthService.getCurrentUser();
-            }
-       });
-            
+// Check if the user is authenticated, and if not redirect to the login page
+app.run(['$route', '$rootScope', '$location', 'AuthService', function ($route, $rootScope, $location, AuthService) {
+   
+     $rootScope.$on('$locationChangeStart', function(ev, next, current) {
+          var nextPath = $location.path();
+          var nextRoute = $route.routes[nextPath]; 
+          
+          if (nextRoute && nextRoute.auth && !AuthService.isAuthed()) {
+            $location.path('/login');          
+          }
+      
+     });
+    
 }]);
 
 })();
