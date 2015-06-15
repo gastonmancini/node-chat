@@ -42,4 +42,19 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($r
       .otherwise({ redirectTo: '/login' });
 }]);
 
+// Check if the user is authenticated, and if not redirect to the login page
+app.run(['$route', '$rootScope', '$location', 'AuthService', function ($route, $rootScope, $location, AuthService) {
+   
+     $rootScope.$on('$locationChangeStart', function(ev, next, current) {
+          var nextPath = $location.path();
+          var nextRoute = $route.routes[nextPath]; 
+          
+          if (nextRoute && nextRoute.auth && !AuthService.isAuthed()) {
+            $location.path('/login');          
+          }
+      
+     });
+    
+}]);
+
 })();
