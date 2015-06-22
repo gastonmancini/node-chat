@@ -8,25 +8,21 @@ angular.module('chatApp').controller('AuthController', ['$scope', '$location', '
             password: ''
       };
       
-      // Initialize login error message visibility
-      $scope.formregister = {
-            error: false
-      }; 
+      // Initialize the error message
+      $scope.errorMessage = '';
 
-      // Authenticate
+      // Authenticate 
       $scope.authenticate = function (credentials) {
+            
             // Try to login 
-            AuthService.login(credentials).then(function (res) {
-                  
-                  // Set the current user and redirect to the chat
-                  var params = AuthService.parseToken(res.data.token);
-                  $scope.setCurrentUser(params.user._id, params.user.email, params.user.username);
-                  
-                  $location.path('/chat');
-            }, function () {
-                  // Show the error
-                  $scope.formregister.error = true;   
-            });
+            AuthService.login(credentials)
+                  .then(function (response, status, headers, config) {
+                        var params = AuthService.parseToken(response.data.token);
+                        $scope.setCurrentUser(params.user._id, params.user.email, params.user.username);
+                        $location.path('/chat'); 
+                  }, function (response, status, headers, config) {
+                        $scope.errorMessage = response.data.message;      
+                  });
       };
 
 }]); 

@@ -95,7 +95,6 @@ angular.module('chatApp').controller('ChatController', ['$scope', '$window', '$s
             } else {
                   // Broadcast noncommand input to other users
                   sendMessage($scope.room, message);
-                  // TODO: escapar el siguiente mensaje
                   $scope.messages.push("Me: " + message);
             }
 

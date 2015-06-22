@@ -1,4 +1,4 @@
-angular.module('chatApp').controller('RegisterController', ['$scope', '$http', '$location', 'ApiBaseUrl', function ($scope, $http, $location, ApiBaseUrl) {
+angular.module('chatApp').controller('RegisterController', ['$scope', '$http', '$location', 'UserService', 'AuthService', function ($scope, $http, $location, UserService, AuthService) {
       
       'use strict';
       
@@ -9,23 +9,21 @@ angular.module('chatApp').controller('RegisterController', ['$scope', '$http', '
             password: ''
       };
       
-      // Initialize registration error message visibility
-      $scope.formregister = {
-            error: false
-      };
+      // Initialize registration error message
+      $scope.errorMessage = '';
 
       // Register a new user
       $scope.register = function (user) {
             
-            $http.post(ApiBaseUrl + '/users', { 'user': user })
-                  .success(function () {
-                        // Redirect to the chat
-                        $location.path('/');
-                  })
-                  .error(function () {
-                        // Show the error
-                        $scope.formregister.error = true;   
-                  });
+            // Try to register 
+            UserService.register(user)
+                  .then(function (response, status, headers, config) {
+                        var params = AuthService.parseToken(response.data.token);
+                        $scope.setCurrentUser(params.user._id, params.user.email, params.user.username);
+                        $location.path('/chat'); 
+                  }, function (response, status, headers, config) {
+                        $scope.errorMessage = response.data.message;      
+            });
       };
 
 }]);
