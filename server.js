@@ -2,7 +2,6 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 var http = require('http').Server(app);
-var config = require('./lib/config/config');
 var morgan = require('morgan');
 
 // Configure express
@@ -16,15 +15,15 @@ app.use(bodyParser.json());
 // Use morgan to log requests to the console
 app.use(morgan('dev'));
 
-var bootstrapNode = require('./lib/bootstrap')(app);
+// Bootstrap application
+var nodechat = require('./lib/core/bootstrap')(app);
   
-http.listen(config.port, function () {
-	console.log('Listening port:' + config.port);
+http.listen(nodechat.config.port, function () {
+	console.log('Listening port:' + nodechat.config.port);
 });
 
 /**
  * Load custom Node functionality, and
  * Starts the socket.io server functionality (provide  the server so it can share the same tcp/ip port)
  */
-var chatServer = require('./lib/chatServer');
-chatServer.listen(http);
+nodechat.applicationServices.chatServer.listen(http);
