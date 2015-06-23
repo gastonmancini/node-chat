@@ -7,10 +7,15 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
 var nodemon = require('gulp-nodemon');
-// Allows removal of files and dirs using globs -matching files using patterns.
+var gutil = require('gulp-util');
 var del = require('del');
 
-var paths = {
+var isProduction = true;
+if (config.env === 'development') {
+    isProduction = false;
+}
+
+var paths = { 
     scriptsFrontend: [
 		'public/scripts/**/*.js', 
 		'!public/build/**/*.js'],
@@ -25,12 +30,12 @@ var paths = {
 // Minify css
 gulp.task('minify-css', function() {
   return gulp.src(paths.stylesheets)
-	 	.pipe(sourcemaps.init())
+	 	.pipe(!isProduction ? sourcemaps.init() : gutil.noop())
 	    .pipe(minifyCss())
 		.pipe(rename({
 			suffix: '.min'
 		}))
-	    .pipe(sourcemaps.write())
+	    .pipe(!isProduction ? sourcemaps.write() : gutil.noop())
 	    .pipe(gulp.dest('public/build/stylesheets'));
 });
 
@@ -57,10 +62,10 @@ gulp.task('clean', function(callback) {
 gulp.task('scripts', ['clean'], function() {
 	// Minify and copy all JavaScript (except vendor scripts) with sourcemaps all the way down
 	return gulp.src(paths.scriptsFrontend)
-		.pipe(sourcemaps.init())
+		.pipe(!isProduction ? sourcemaps.init() : gutil.noop())
 		.pipe(uglify())
 		.pipe(concat('all.min.js'))
-		.pipe(sourcemaps.write())
+		.pipe(!isProduction ? sourcemaps.write() : gutil.noop())
 		.pipe(gulp.dest('public/build/scripts'));
 });
 
