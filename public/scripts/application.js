@@ -20,7 +20,7 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($r
       $routeProvider
             .when('/login', {
             templateUrl: '/views/login.html',
-            controller: 'AuthController',
+            controller: 'LoginController',
             auth: false
       })
             .when('/chat', {
