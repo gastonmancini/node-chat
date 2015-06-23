@@ -7,7 +7,7 @@
 var app = angular.module('chatApp', ['ngRoute', 'ngSanitize']);
 
 // Define a constant with the API base url
-app.constant('ApiBaseUrl', 'http://localhost:3000/api');
+app.constant('ApiBaseUrl', '/api');
 
 // Configure the application routes
 app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
