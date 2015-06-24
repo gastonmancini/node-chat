@@ -21,11 +21,14 @@ describe('Controller: LoginController', function () {
           $stateParams: params || {}
         });
       };
-      scope.credentials = { email: '', password: '' };
-      scope.errorMessage = '';
       createLoginController();
     });
 
+  });
+  
+  it('should be correctly initialized', function () {
+      expect(scope.credentials).not.toBeUndefined();
+      expect(scope.errorMessage).toBe('');
   });
 
   it('should show an error when the authentication fails', function () {

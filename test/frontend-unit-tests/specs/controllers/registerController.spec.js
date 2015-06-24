@@ -22,11 +22,14 @@ describe('Controller: RegisterController', function () {
           $stateParams: params || {}
         });
       };
-      scope.user = { email: '', username: '', password: '' };
-      scope.errorMessage = '';
       createRegisterController();
     });
 
+  });
+  
+  it('should be correctly initialized', function () {
+      expect(scope.user).not.toBeUndefined();
+      expect(scope.errorMessage).toBe('');
   });
 
   it('should show an error when the registration fails', function () {

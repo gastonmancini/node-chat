@@ -6,12 +6,12 @@ angular.module('chatApp').factory('AuthService', ['$http', '$window', 'ApiBaseUr
  
       // Save the token in the local storage
       authService.saveToken = function(token) {
-            $window.localStorage.jwtToken = token;
+            $window.localStorage.setItem('jwtToken', token);
       };
       
       // Retrieve the token in the local storage
       authService.getToken = function() {
-            return $window.localStorage.jwtToken;
+            return $window.localStorage.getItem('jwtToken');
       };
            
       // Login - Make a request to the api for authenticating      
