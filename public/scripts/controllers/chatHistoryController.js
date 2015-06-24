@@ -1,25 +1,26 @@
-angular.module('chatApp').controller('ChatHistoryController', ['$scope', '$http', '$location', 'ChatHistoryService', function ($scope, $http, $location, ChatHistoryService) {
+angular.module('chatApp').controller('ChatHistoryController', ['$scope', 'ChatHistoryService', function ($scope, ChatHistoryService) {
     
     'use strict';
-       
-    // Initialize the chatroom name   
-    $scope.chatRoomName = 'Lobby';
-    
-    // Initialize the error message
+
+    $scope.chatRoomName = 'Lobby';        
     $scope.errorMessage = '';
-   
-    ChatHistoryService.getChatRooms()
-        .then(function (response, status, headers, config) {
-            $scope.chatRooms = response.data;
-        },function (response, status, headers, config) {
-            $scope.errorMessage = 'An error ocurred retrieving the history. Please reload de page.';
-        });
-    
-    getHistory('Lobby');
+
+    loadDefaultData();
     
     $scope.reloadHistory = function (chatRoom) {
         return getHistory(chatRoom);
     };
+    
+    function loadDefaultData() {
+        ChatHistoryService.getChatRooms()
+            .then(function (response, status, headers, config) {
+                $scope.chatRooms = response.data;
+            },function (response, status, headers, config) {
+                $scope.errorMessage = 'An error ocurred retrieving the history. Please reload de page.';
+            });
+        
+        getHistory('Lobby');        
+    }
     
     function getHistory(chatRoom) {
         ChatHistoryService.getChatRoomHistory(chatRoom)
