@@ -19,7 +19,7 @@ angular.module('chatApp').controller('LoginController', ['$scope', '$location', 
                   .then(function (response, status, headers, config) {
                         var params = AuthService.parseToken(response.data.token);
                         $scope.setCurrentUser(params.user._id, params.user.email, params.user.username);
-                        $location.path('/chat'); 
+                        $location.path('/chat');
                   }, function (response, status, headers, config) {
                         $scope.errorMessage = response.data.message;      
                   });

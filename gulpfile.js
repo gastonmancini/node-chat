@@ -8,6 +8,7 @@ var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
 var nodemon = require('gulp-nodemon');
 var gutil = require('gulp-util');
+var karma = require('karma').server;
 var del = require('del');
 
 var isProduction = true;
@@ -24,6 +25,15 @@ var paths = {
 		'lib/**/*.js'],
 	stylesheets: [
 		'public/stylesheets/**/*.css'
+	],
+	testsFrontend: [
+		'test/frontend-unit-tests/**/*.js'
+	],
+	testsBackend: [
+		'test/backend-unit-tests/**/*.js'
+	],
+	testsE2E: [
+		'test/e2e-tests/**/*.js'
 	]
 };
 
@@ -87,5 +97,17 @@ gulp.task('watch', function () {
 	gulp.watch(paths.stylesheets, ['minify-css']);
 });
 
+// Run test once and exit
+gulp.task('test', function(done) {
+    karma.start({
+	    configFile: __dirname + '/test/frontend-unit-tests/karma.conf.js',
+	    singleRun: true
+  	}, done);
+});
+
+// Watch for file changes and re-run tests on each change
+/*gulp.task('tdd', function(done) {
+    karma.start('test/frontend-unit-tests/karma.conf.js', done);
+});*/
 
 gulp.task('default', ['watch', 'scripts', 'minify-css']);

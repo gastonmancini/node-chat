@@ -1,7 +1,11 @@
 {
 	"name": "node-chat-tio",
-	"version": "0.2.0",
+	"version": "0.4.0",
 	"description": "A multiroom chat server + API",
+	"repository": {
+	    "type": "git",
+	    "url": "https://github.com/gastonmancini/node-chat"
+  	},
 	"dependencies": {
         "angular": "1.4.0",
         "angular-route": "1.4.0",
@@ -19,6 +23,7 @@
 		"socket.io": "~0.9.6"
 	},
 	"devDependencies": {
+		"angular-mocks": "1.4.1",
 		"gulp": "3.9.0",
 		"gulp-concat": "2.5.2",
         "gulp-jshint": "1.11.0",
@@ -27,6 +32,9 @@
 		"gulp-rename": "1.2.2",
 		"gulp-sourcemaps": "1.5.2",
 		"gulp-uglify": "1.2.0",
-		"gulp-util": "3.0.5"
+		"gulp-util": "3.0.5",
+		"karma": "0.12.36",
+    	"karma-jasmine": "0.3.5",
+    	"karma-phantomjs-launcher": "0.2.0"
 	}
 }
