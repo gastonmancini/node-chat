@@ -1,5 +1,5 @@
 // Inject the $interceptor to avoid circular dependencies
-angular.module('chatApp').factory('AuthInterceptor', ['$q', '$injector', function ($q, $injector) {
+angular.module('chatApp').factory('AuthInterceptor', ['$injector', function ($injector) {
 
       return {
             
