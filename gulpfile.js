@@ -8,6 +8,7 @@ var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
 var nodemon = require('gulp-nodemon');
 var gutil = require('gulp-util');
+var mocha = require('gulp-mocha');
 var karma = require('karma').server;
 var del = require('del');
 
@@ -97,12 +98,25 @@ gulp.task('watch', function () {
 	gulp.watch(paths.stylesheets, ['minify-css']);
 });
 
-// Run test once and exit
-gulp.task('test', function(done) {
+// Run frontend tests once and exit
+gulp.task('test-frontend', function(done) {
     karma.start({
 	    configFile: __dirname + '/test/frontend-unit-tests/karma.conf.js',
 	    singleRun: true
   	}, done);
+});
+
+// Run backend tests once and exit
+gulp.task('test-backend', function() {
+	return gulp.src(paths.testsBackend)
+        .pipe(mocha({
+            reporter: 'nyan',
+			require: [ __dirname + '/test/backend-unit-tests/server.js'],
+            clearRequireCache: true,
+            ignoreLeaks: true
+    })).once('end', function () {
+      process.exit();
+    });
 });
 
 // Watch for file changes and re-run tests on each change
