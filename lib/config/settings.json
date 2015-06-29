@@ -5,10 +5,10 @@
   },
   "production": {
     "secretAuthKey": "fd89784e59c72499525556f80289b2c7",
-    "database_connection": "mongodb://nodechat:nodechat123@ds043002.mongolab.com:43002/chathistory"
+    "database_connection": "mongodb://nodechat:nodechat123@ds061308.mongolab.com:61308/nodechat"
   },
   "test": {
     "secretAuthKey": "testing",
-    "database_connection": "mongodb://localhost:27017/nodechattest"
+    "database_connection": "mongodb://nodechattest:nodechattest123@ds031631.mongolab.com:31631/nodechattest"
   }
 }

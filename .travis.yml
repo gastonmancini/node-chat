@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - 0.12
+env:
+  - NODE_ENV=test
 before_script:
   - export DISPLAY=:99.0
   - npm start
@@ -9,3 +11,4 @@ before_script:
   - sleep 1 #give server time to start
 script: 
   - npm run test-frontend
+  - npm run test-backend
