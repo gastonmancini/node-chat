@@ -1,7 +1,7 @@
 {
 	"name": "node-chat-tio",
 	"version": "0.4.0",
-	"description": "A multiroom chat server + API",
+	"description": "Realtime Chat with NodeJs",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/gastonmancini/node-chat"
@@ -40,5 +40,24 @@
 		"karma-phantomjs-launcher": "0.2.0",
 		"should": "7.0.1",
 		"sinon": "1.15.3"
+	},
+	"scripts": {
+
+		"prestart": "npm install",
+		"start": "node server.js",
+		
+		"pretest-frontend": "npm install",
+		"test-frontend": "gulp test-frontend",
+		
+		"pretest-backend": "npm install",
+		"test-backend": "gulp test-backend",
+		
+		"prewebdriver-update": "npm install",
+		"webdriver-update": "gulp webdriver-update",
+		
+		"pretest-e2e": "npm run webdriver-update",
+		"test-e2e": "gulp test-e2e",
+		
+		"pre-prod": "gulp preprod"
 	}
 }

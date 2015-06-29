@@ -144,3 +144,5 @@ gulp.task('webdriver-update', webdriverUpdate);
 });*/
 
 gulp.task('default', ['watch', 'scripts', 'minify-css']);
+
+gulp.task('preprod', ['scripts', 'minify-css']);
