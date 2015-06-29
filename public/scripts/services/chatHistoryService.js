@@ -1,7 +1,7 @@
 angular.module('chatApp').factory('ChatHistoryService', ['$http', 'ApiBaseUrl', function ($http, ApiBaseUrl) {
-      
+
       'use strict';
-      
+
       var chatHistoryService = {};
 
       // Get the chat history of a given chatroom 

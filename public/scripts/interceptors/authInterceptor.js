@@ -8,13 +8,13 @@ angular.module('chatApp').factory('AuthInterceptor', ['$injector', function ($in
 
                   var AuthService = $injector.get('AuthService');
                   var token = AuthService.getToken();
-                  
+
                   if (token) {
                         config.headers['x-access-token'] = token;
                   }
-                  
+
                   config.headers['Content-Type'] = 'application/json; charset=UTF-8';
-                  
+
                   return config;
 
             },
@@ -24,11 +24,11 @@ angular.module('chatApp').factory('AuthInterceptor', ['$injector', function ($in
 
                   var token = res.data.token;
                   var AuthService = $injector.get('AuthService');
-                  
+
                   if (token) {
                         AuthService.saveToken(token);
                   }
-                  
+
                   return res;
             }
   };

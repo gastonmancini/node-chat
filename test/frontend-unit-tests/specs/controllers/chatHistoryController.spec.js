@@ -9,7 +9,7 @@ describe('Controller: ChatHistoryController', function () {
   });
 
   beforeEach(function () {
-     
+
     inject(function ($controller, $rootScope, _ChatHistoryService_) {
       scope = $rootScope.$new();
       ChatHistoryService = _ChatHistoryService_;
@@ -23,10 +23,10 @@ describe('Controller: ChatHistoryController', function () {
     });
 
   });
-  
+
   it('should be correctly initialized', function () {
-      expect(scope.chatRoomName).toBe('Lobby');
-      expect(scope.errorMessage).toBe('');
+    expect(scope.chatRoomName).toBe('Lobby');
+    expect(scope.errorMessage).toBe('');
   });
 
   it('should show an error if the reload history fails', function () {
@@ -43,16 +43,16 @@ describe('Controller: ChatHistoryController', function () {
     expect(scope.errorMessage).toBe('An error ocurred retrieving the history. Please reload de page.');
 
   });
-  
+
   it('should reload the chatroom history', function () {
 
     var history = "a lot of messages";
     var chatRoomName = "testChatRoomName";
 
     spyOn(ChatHistoryService, 'getChatRoomHistory').and.callFake(function () {
-      
+
       var response = { data: history };
-      
+
       return {
         then: function (success, error) {
           return success(response);

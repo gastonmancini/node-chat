@@ -25,10 +25,10 @@ describe('Controller: LoginController', function () {
     });
 
   });
-  
+
   it('should be correctly initialized', function () {
-      expect(scope.credentials).not.toBeUndefined();
-      expect(scope.errorMessage).toBe('');
+    expect(scope.credentials).not.toBeUndefined();
+    expect(scope.errorMessage).toBe('');
   });
 
   it('should show an error when the authentication fails', function () {

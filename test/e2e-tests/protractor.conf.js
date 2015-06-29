@@ -20,9 +20,9 @@ exports.config = {
     showColors: true,
     defaultTimeoutInterval: 30000
   },
-  
+
   baseUrl: 'http://localhost:3000/',
-  
+
   seleniumServerJar: './node_modules/protractor/selenium/selenium-server-standalone-2.45.0.jar',
   
   // Bootstrap the e2e tests

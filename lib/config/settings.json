@@ -1,14 +1,14 @@
 {
   "development": {
-      "secretAuthKey": "a19ea622182c63ddc19bb22cde982b82",
-      "database_connection": "mongodb://localhost:27017/nodechat"
-  }, 
+    "secretAuthKey": "a19ea622182c63ddc19bb22cde982b82",
+    "database_connection": "mongodb://localhost:27017/nodechat"
+  },
   "production": {
-      "secretAuthKey": "fd89784e59c72499525556f80289b2c7",
-      "database_connection": "mongodb://nodechat:nodechat123@ds043002.mongolab.com:43002/chathistory"
-  }, 
+    "secretAuthKey": "fd89784e59c72499525556f80289b2c7",
+    "database_connection": "mongodb://nodechat:nodechat123@ds043002.mongolab.com:43002/chathistory"
+  },
   "test": {
-      "secretAuthKey": "testing",
-      "database_connection": "mongodb://localhost:27017/nodechattest"
+    "secretAuthKey": "testing",
+    "database_connection": "mongodb://localhost:27017/nodechattest"
   }
 }

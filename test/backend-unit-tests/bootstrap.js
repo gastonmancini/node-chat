@@ -1,15 +1,15 @@
-module.exports = function (app) { 
+module.exports = function (app) {
 
   'use strict';
-  
+
   var libPath = __dirname + '/../../lib';
 
   app.nodechat = {
-      dependencies: { },
-      domainServices: { },
-      foundation: { },
-      models: { },
-      repositories: { }
+    dependencies: {},
+    domainServices: {},
+    foundation: {},
+    models: {},
+    repositories: {}
   };
 
   // Register third-party modules
@@ -23,8 +23,8 @@ module.exports = function (app) {
   // Connect to mongoDb
   var db = app.nodechat.dependencies.mongoose.connect(app.nodechat.config.db, function (err) {
     if (err) {
-      console.log ('Error connecting to the database' + app.nodechat.config.db + '. Error: ' + err);
-    } 
+      console.log('Error connecting to the database' + app.nodechat.config.db + '. Error: ' + err);
+    }
   });
   
   // Register the foundation services
@@ -43,5 +43,5 @@ module.exports = function (app) {
   app.nodechat.domainServices.chatService = require(libPath + '/domainServices/chatService')(app.nodechat.repositories.chatRepository);
   app.nodechat.domainServices.userService = require(libPath + '/domainServices/userService')(app.nodechat.config, app.nodechat.dependencies.jwt, app.nodechat.repositories.userRepository);
 
-  return app.nodechat; 
+  return app.nodechat;
 };

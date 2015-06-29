@@ -5,12 +5,12 @@ angular.module('chatApp').factory('AuthService', ['$http', '$window', 'ApiBaseUr
       var authService = {};
  
       // Save the token in the local storage
-      authService.saveToken = function(token) {
+      authService.saveToken = function (token) {
             $window.localStorage.setItem('jwtToken', token);
       };
       
       // Retrieve the token in the local storage
-      authService.getToken = function() {
+      authService.getToken = function () {
             return $window.localStorage.getItem('jwtToken');
       };
            
@@ -28,28 +28,28 @@ angular.module('chatApp').factory('AuthService', ['$http', '$window', 'ApiBaseUr
       
       // Check if the user is authenticated
       authService.isAuthed = function () {
-            
+
             var token = authService.getToken();
-            
+
             if (token) {
-                  
+
                   var params = authService.parseToken(token);
                   var dateNow = Math.round(new Date().getTime() / 1000);
                   
                   // If the token has not expired
                   return dateNow <= params.exp;
-                  
+
             } else {
-                  
+
                   return false;
-                  
+
             }
       };
       
       // Parse the JSON Web Token
       authService.parseToken = function (token) {
             var base64Url = token.split('.')[1];
-            var base64 = base64Url.replace('-','+').replace('_','/');
+            var base64 = base64Url.replace('-', '+').replace('_', '/');
             return JSON.parse($window.atob(base64));
       };
 

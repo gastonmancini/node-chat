@@ -1,7 +1,7 @@
 angular.module('chatApp').controller('ChatController', ['$scope', '$window', '$sce', 'SocketService', function ($scope, $window, $sce, SocketService) {
-      
+
       'use strict';
-      
+
       $scope.messages = [];
       $scope.roomList = [];
       $scope.room = 'Lobby';
@@ -11,19 +11,19 @@ angular.module('chatApp').controller('ChatController', ['$scope', '$window', '$s
                   
       // Display results of a name-change attempt
       SocketService.on('nameResult', function (result) {
-          	var message;
-          	
+    var message;
+
             if (result.success) {
                   message = 'You are now known as ' + result.name + '.';
-          	} else {
+    } else {
                   message = result.message;
-          	}
+    }
             $scope.messages.push(message);
       });
               
       // Display results of a room change       
       SocketService.on('joinResult', function (result) {
-          	$scope.room = result.room;
+    $scope.room = result.room;
             $scope.messages = [];
             $scope.messages.push('You are now in the room ' + result.room);
       });    
@@ -36,12 +36,12 @@ angular.module('chatApp').controller('ChatController', ['$scope', '$window', '$s
       // Display list of rooms available
       SocketService.on('rooms', function (rooms) {
             $scope.roomList = [];
-          	for (var room in rooms) {
-                room = room.substring(1, room.length);
-                if (room !== '') {
-                    $scope.roomList.push(room);
-                }
-          	}
+    for (var room in rooms) {
+      room = room.substring(1, room.length);
+      if (room !== '') {
+        $scope.roomList.push(room);
+      }
+    }
 
       });
           
@@ -52,30 +52,30 @@ angular.module('chatApp').controller('ChatController', ['$scope', '$window', '$s
           
       // Allow submitting the form to send a chat message
       $scope.submit = function (message) {
-        	processUserInput(message);
+    processUserInput(message);
       };
       
       // Allow click a room name to change to that chatroom
       $scope.focusChatroom = function (room) {
-		processCommand('/join ' + room);
+    processCommand('/join ' + room);
             $scope.messages = [];
             $scope.messages.push('Room changed.');
-	};
+  };
       
       // Create new chatroom
       $scope.createNewChatroom = function (room) {
             if (!room) {
                   $scope.newRoomError = true;
-	      } else {
-      		 processUserInput("/join " + room);
-      	  	 $('#myModal').modal('hide');
-      		 $scope.newRoomError = false;
-      	}
+    } else {
+      processUserInput("/join " + room);
+      $('#myModal').modal('hide');
+      $scope.newRoomError = false;
+    }
       };
       
       // Sanizite Html
-      $scope.sanitizeHtml = function(value) {
-        return $sce.trustAsHtml(value);
+      $scope.sanitizeHtml = function (value) {
+    return $sce.trustAsHtml(value);
       };
         
       /**
@@ -125,7 +125,7 @@ angular.module('chatApp').controller('ChatController', ['$scope', '$window', '$s
                   .substring(1, words[0].length)
                   .toLowerCase();
             var message = false;
-  
+
             switch (command) {
                   case 'join':
                         words.shift();

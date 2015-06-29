@@ -1,7 +1,7 @@
-(function(){
-    
+(function () {
+
 	'use strict';
-	
+
 	var express = require('express');
 	var bodyParser = require('body-parser');
 	var app = express();
@@ -21,7 +21,7 @@
 	
 	// Bootstrap application
 	var nodechat = require('./lib/core/bootstrap')(app);
-	  
+
 	http.listen(nodechat.config.port, function () {
 		console.log('Listening port:' + nodechat.config.port);
 	});

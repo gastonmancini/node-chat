@@ -26,10 +26,10 @@ describe('Controller: RegisterController', function () {
     });
 
   });
-  
+
   it('should be correctly initialized', function () {
-      expect(scope.user).not.toBeUndefined();
-      expect(scope.errorMessage).toBe('');
+    expect(scope.user).not.toBeUndefined();
+    expect(scope.errorMessage).toBe('');
   });
 
   it('should show an error when the registration fails', function () {
