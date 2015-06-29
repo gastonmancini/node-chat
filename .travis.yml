@@ -9,4 +9,3 @@ before_script:
   - sleep 1 #give server time to start
 script: 
   - npm run test-frontend
-  - npm run test-backend
