@@ -159,10 +159,30 @@ gulp test-e2e
 
 This script will execute the end-to-end tests against the application being hosted on the development server.
 
+## Continuous Integration
+
+### Travis CI
+
+[Travis CI](https://travis-ci.org/) is a continuous integration service, which can monitor GitHub for new commits
+to your repository and execute scripts such as building the app or running tests. The node-chat
+project contains a Travis configuration file, `.travis.yml`, which will cause Travis to run the frontend and backend unit
+tests when you push to GitHub.
+
+You will need to enable the integration between Travis and GitHub. See the Travis website for more
+instruction on how to do this.
+
+### Heroku
+
+Heroku have provided a CI/deployment setup:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+If you run this, you will get a cloned version of this repo to start working on in a private git repo,
+along with a CI service (in Travis) hosted that will run unit tests.
+
 ## Issues and nice-to-have features
 Please report any issue or nice to have feature [here](https://github.com/gastonmancini/node-chat/issues/).
 
 ## Production
 Currently available online in [heroku](http://chat-node-tio.herokuapp.com).
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
