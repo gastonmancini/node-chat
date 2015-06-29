@@ -131,7 +131,7 @@ gulp.task('test-e2e', function(callback) {
 			configFile: __dirname + '/test/e2e-tests/protractor.conf.js',
 			args: []
 		}))
-		.on('error', function(e) { throw e })
+		.on('error', function(e) { throw e; })
 		.on('end', callback);
 });
 
