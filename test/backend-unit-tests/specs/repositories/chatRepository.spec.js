@@ -6,7 +6,7 @@ var nodechat = require('./../../server');
 var ChatLine = nodechat.models.ChatLine;
 var chatRepository = nodechat.repositories.chatRepository;
 
-describe('Repositories: UserRepository', function () {
+describe('Repositories: ChatRepository', function () {
 	
 	var chatLine = { chatRoom: 'chatRoom', nickName: 'nickName', message: 'message', serverDateTime: new Date().toISOString() };
 	var chatRooms = [ 'chatRoom1', 'chatRoom2' ];
