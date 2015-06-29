@@ -1,6 +1,6 @@
 # Realtime Chat with NodeJs
 
-[![Build Status](https://travis-ci.org/gastonmancini/node-chat.svg?branch=master)](https://travis-ci.org/gastonmancini/node-chat)
+[![Build Status](https://travis-ci.org/gastonmancini/node-chat.svg?branch=master)](https://travis-ci.org/gastonmancini/node-chat) [![Dependency Status](https://img.shields.io/david/gastonmancini/node-chat.svg?style=flat-square)](https://david-dm.org/gastonmancini/node-chat.svg)
 
 The project is a multiroom Node.js chat web app. It allows users to chat online with each other by entering messages into a simple form. A message, once entered, is sent to all the other users in the same chat room. When starting the application, a user is automatically assigned a guest name, but it can be  changed by entering a command. Chat commands are prefaced with a slash (/). Similarly, a user can enter a command to create a new chat room (or join it if it already exists). You can simply register by email and start chatting.
 
