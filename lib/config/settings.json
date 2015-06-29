@@ -6,5 +6,9 @@
   "production": {
       "secretAuthKey": "fd89784e59c72499525556f80289b2c7",
       "database_connection": "mongodb://nodechat:nodechat123@ds043002.mongolab.com:43002/chathistory"
+  }, 
+  "test": {
+      "secretAuthKey": "testing",
+      "database_connection": "mongodb://localhost:27017/nodechattest"
   }
 }

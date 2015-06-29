@@ -9,6 +9,8 @@ var sourcemaps = require('gulp-sourcemaps');
 var nodemon = require('gulp-nodemon');
 var gutil = require('gulp-util');
 var mocha = require('gulp-mocha');
+var protractor = require("gulp-protractor").protractor;
+var webdriverUpdate = require('gulp-protractor').webdriver_update;
 var karma = require('karma').server;
 var del = require('del');
 
@@ -27,8 +29,11 @@ var paths = {
 	stylesheets: [
 		'public/stylesheets/**/*.css'
 	],
+	views: [
+		'public/views/**/*.html'
+	],
 	testsFrontend: [
-		'test/frontend-unit-tests/**/*.js'
+		'test/frontend-unit-tests/scenarios/**/*.js'
 	],
 	testsBackend: [
 		'test/backend-unit-tests/**/*.js'
@@ -118,6 +123,20 @@ gulp.task('test-backend', function() {
       process.exit();
     });
 });
+
+// Run the end-to-end tests
+gulp.task('test-e2e', function(callback) {
+	gulp.src(paths.testsE2E)
+		.pipe(protractor({
+			configFile: __dirname + '/test/e2e-tests/protractor.conf.js',
+			args: []
+		}))
+		.on('error', function(e) { throw e })
+		.on('end', callback);
+});
+
+// Downloads the selenium webdriver
+gulp.task('webdriver-update', webdriverUpdate);
 
 // Watch for file changes and re-run tests on each change
 /*gulp.task('tdd', function(done) {
