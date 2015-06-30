@@ -6,7 +6,9 @@ env:
 before_script:
   - export DISPLAY=:99.0
   - npm install -g gulp
-  - sleep 1 #give server time to start
+  - npm start &
+  - sleep 2 #give server time to start
 script: 
   - npm run test-frontend
   - npm run test-backend
+  - npm run test-e2e
