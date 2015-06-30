@@ -138,11 +138,4 @@ gulp.task('test-e2e', function(callback) {
 // Downloads the selenium webdriver
 gulp.task('webdriver-update', webdriverUpdate);
 
-// Watch for file changes and re-run tests on each change
-/*gulp.task('tdd', function(done) {
-    karma.start('test/frontend-unit-tests/karma.conf.js', done);
-});*/
-
 gulp.task('default', ['watch', 'scripts', 'minify-css']);
-
-gulp.task('preprod', ['scripts', 'minify-css']);
