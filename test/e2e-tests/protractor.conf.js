@@ -1,11 +1,11 @@
 'use strict';
 
 exports.config = {
-  directConnect: true,
+  directConnect: false,
 
   // Capabilities to be passed to the webdriver instance.
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'firefox'
   },
 
   // Framework to use. Jasmine 2 is recommended.
@@ -22,8 +22,6 @@ exports.config = {
   },
 
   baseUrl: 'http://localhost:3000/',
-
-  seleniumServerJar: './node_modules/protractor/selenium/selenium-server-standalone-2.45.0.jar',
   
   // Bootstrap the e2e tests
   beforeLaunch: './beforeLaunch'
