@@ -6,7 +6,8 @@ env:
 before_script:
   - export DISPLAY=:99.0
   - npm install -g gulp
-  - npm start &
+  - sh -e /etc/init.d/xvfb start
+  - npm start > /dev/null &
   - sleep 2 #give server time to start
 script: 
   - npm run test-frontend
