@@ -35,13 +35,15 @@ angular.module('chatApp').controller('ChatController', ['$scope', '$window', '$s
           
       // Display list of rooms available
       SocketService.on('rooms', function (rooms) {
+            
             $scope.roomList = [];
-    for (var room in rooms) {
-      room = room.substring(1, room.length);
-      if (room !== '') {
-        $scope.roomList.push(room);
-      }
-    }
+            
+            for (var i=0; i<rooms.length; i++) {
+                  if (rooms[i] !== '') {
+                        $scope.roomList.push(rooms[i]);
+                  }
+                  
+            }
 
       });
           

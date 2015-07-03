@@ -11,7 +11,7 @@
 		<div class="col-md-8">
 			<div class="panel panel-primary">
 				<div class="panel-heading" id="room">{{ room }}</div>
-				<div class="panel-body" id="messages"><div ng-bind-html="sanitizeHtml(m)" ng-repeat="m in messages"></div></div>
+				<div class="panel-body" id="messages"><div ng-bind-html="sanitizeHtml(m)" ng-repeat="m in messages track by $index"></div></div>
 			</div>
 		</div>
 		<div class="col-md-4">
