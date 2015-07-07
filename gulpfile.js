@@ -14,10 +14,7 @@ var webdriverUpdate = require('gulp-protractor').webdriver_update;
 var karma = require('karma').server;
 var del = require('del');
 
-var isProduction = true;
-if (config.env === 'development') {
-    isProduction = false;
-}
+var isProduction = (gutil.env.production === true ? true : false);
 
 var paths = { 
     scriptsFrontend: [
@@ -139,3 +136,5 @@ gulp.task('test-e2e', function(callback) {
 gulp.task('webdriver-update', webdriverUpdate);
 
 gulp.task('default', ['watch', 'scripts', 'minify-css', 'nodemon']);
+
+gulp.task('release', ['scripts', 'minify-css']);
