@@ -1,4 +1,4 @@
-angular.module('chatApp').controller('LoginController', ['$scope', '$location', 'AuthService', function ($scope, $location, AuthService) {
+angular.module('chatApp').controller('LoginController', ['$scope', '$location', '$routeParams','AuthService', function ($scope, $location, $routeParams, AuthService) {
       
       'use strict';
       
@@ -10,7 +10,19 @@ angular.module('chatApp').controller('LoginController', ['$scope', '$location', 
       
       // Initialize the error message
       $scope.errorMessage = '';
-
+      
+      // Initialize the default message
+      $scope.defaultMessage = '';
+      
+      var param = $routeParams.param;
+      if (param) {
+            if (param === 'registration_success') {   
+                  $scope.defaultMessage = 'Your account was successfully verified.';
+            } else if (param === 'verify_account') {
+                        $scope.defaultMessage = 'Please check your email to verify the new account.';
+            }
+      }
+      
       // Authenticate 
       $scope.authenticate = function (credentials) {
             

@@ -23,6 +23,11 @@
       controller: 'LoginController',
       auth: false
     })
+      .when('/login/:param', {
+      templateUrl: '/views/login.html',
+      controller: 'LoginController',
+      auth: false
+    })
       .when('/chat', {
       templateUrl: '/views/chat.html',
       controller: 'ChatController',
