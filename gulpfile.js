@@ -115,7 +115,7 @@ gulp.task('test-frontend', function(done) {
 gulp.task('test-backend', function() {
 	return gulp.src(paths.testsBackend)
         .pipe(mocha({
-            reporter: 'nyan',
+            reporter: 'spec',
 			require: [ __dirname + '/test/backend-unit-tests/server.js'],
             clearRequireCache: true,
             ignoreLeaks: true
