@@ -17,16 +17,27 @@
 				<label for="inputUsername">Username</label>
 				<input type="text" class="form-control" id="inputUsername" placeholder="Username" ng-model="user.username">
 			</div>
-			<div class="form-group">
+			<div class="form-group"
+				ng-class="{'has-error': isInputInvalid(user.password), 'has-success': isInputValid(user.password)}">
 				<label for="inputPassword">Password</label>
 				<input type="password" class="form-control" id="inputPassword" placeholder="Password" ng-model="user.password">
+				<div class="progress" style="margin-top:10px">
+							<div class="progress-bar"
+									ng-class="{'progress-bar-success': isPasswordStrong(), 'progress-bar-warning': isPasswordOk(), 'progress-bar-danger': isPasswordWeak()}"
+									aria-valuenow="{{ passwordStrength }}"
+									aria-valuemin="0"
+									aria-valuemax="100"
+									style="width:{{ passwordStrength }}%">
+								
+							</div>
+				</div>
 			</div>
 			<div class="form-group">
 				<div class="error">
 					<p class="text-danger">{{ errorMessage }}</p>
 				</div>
 			</div>
-			<button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="register(user)">Submit</button>
+			<button type="submit" class="btn btn-lg btn-primary btn-block" ng-disabled="isFormInvalid()" ng-click="register(user)">Submit</button>
 			<a href="/#/login" class="login-button btn btn-default btn-lg btn-block" role="button">Login</a>
 		</form>
 	</div>
