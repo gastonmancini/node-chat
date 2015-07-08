@@ -161,6 +161,6 @@ gulp.task('test-e2e', ['setup-e2e-tests'], function() {
 // Downloads the selenium webdriver
 gulp.task('webdriver-update', webdriverUpdate);
 
-gulp.task('default', ['development', 'watch', 'scripts', 'minify-css', 'nodemon']);
+gulp.task('default', ['watch', 'scripts', 'minify-css', 'nodemon']);
 
 gulp.task('release', ['scripts', 'minify-css']);
