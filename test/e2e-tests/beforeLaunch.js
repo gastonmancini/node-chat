@@ -11,17 +11,28 @@ module.exports = function (app) {
     models: {},
     repositories: {}
   }};
+  
+  // Native modules
+  app.nodechat.dependencies.crypto = require('crypto');
 
   // Register third-party modules
   app.nodechat.dependencies.bCrypt = require('bcrypt-nodejs');
   app.nodechat.dependencies.jwt = require('jsonwebtoken');
   app.nodechat.dependencies.mongoose = require('mongoose');
+  app.nodechat.dependencies.nodemailer = require('nodemailer');
   
   // Register configuration
   app.nodechat.config = require(libPath + '/config/config');
     
   // Register the foundation services
   app.nodechat.foundation.encryption = require(libPath + '/foundation/encryption')(app.nodechat.dependencies.bCrypt);
+  app.nodechat.foundation.mailer = require(libPath + '/foundation/mailer')(app.nodechat.config, app.nodechat.dependencies.nodemailer);
+  
+  // Setup mailer
+  app.nodechat.foundation.mailer.setup(app.nodechat.config.smtpService, app.nodechat.config.smtpUser, app.nodechat.config.smtpPassword,
+  	function (err) {
+         console.log("An error ocurred creating the SMTP transport. Error: " + err);
+  });
   
   // Register the entities...
   app.nodechat.models.User = require(libPath + '/models/user')(app.nodechat.dependencies.mongoose, app.nodechat.foundation.encryption);
@@ -34,7 +45,7 @@ module.exports = function (app) {
   // Register the domainServices
   app.nodechat.domainServices.authService = require(libPath + '/domainServices/authService')(app.nodechat.config, app.nodechat.dependencies.jwt, app.nodechat.repositories.userRepository);
   app.nodechat.domainServices.chatService = require(libPath + '/domainServices/chatService')(app.nodechat.repositories.chatRepository);
-  app.nodechat.domainServices.userService = require(libPath + '/domainServices/userService')(app.nodechat.config, app.nodechat.dependencies.jwt, app.nodechat.repositories.userRepository);
+  app.nodechat.domainServices.userService = require(libPath + '/domainServices/userService')(app.nodechat.config, app.nodechat.dependencies.jwt, app.nodechat.repositories.userRepository, app.nodechat.foundation.mailer, app.nodechat.dependencies.crypto);
 
   // Connect to mongoDb
   var db = app.nodechat.dependencies.mongoose.connect(app.nodechat.config.db, function (err) {
@@ -45,7 +56,7 @@ module.exports = function (app) {
 
     console.log('Successfully connected to: ' + app.nodechat.config.db);
 
-    app.nodechat.repositories.userRepository.create('e2e_user', 'e2e@test.com', 'e2epassword', null); 
+    app.nodechat.repositories.userRepository.create('e2e_user', 'e2e@test.com', 'e2epassword', true, 'validationToken', null); 
 
   });
 

@@ -14,7 +14,7 @@ var webdriverUpdate = require('gulp-protractor').webdriver_update;
 var karma = require('karma').server;
 var del = require('del');
 
-var isProduction = (gutil.env.production === true ? true : false);
+var environment = 'production';
 
 var paths = { 
     scriptsFrontend: [
@@ -40,15 +40,29 @@ var paths = {
 	]
 };
 
+// Hacks for passing arguments to the gulp tasks
+gulp.task('development', function () {
+	environment = 'development';
+});
+gulp.task('testing', function () {
+	environment = 'testing';
+});
+gulp.task('production', function () {
+	environment = 'production';
+}); 
+gulp.task('production_testing', function () {
+	environment = 'production_testing';
+}); 
+
 // Minify css
 gulp.task('minify-css', function() {
   return gulp.src(paths.stylesheets)
-	 	.pipe(!isProduction ? sourcemaps.init() : gutil.noop())
+	 	.pipe((environment !== 'production') ? sourcemaps.init() : gutil.noop())
 	    .pipe(minifyCss())
 		.pipe(rename({
 			suffix: '.min'
 		}))
-	    .pipe(!isProduction ? sourcemaps.write() : gutil.noop())
+	    .pipe((environment !== 'production') ? sourcemaps.write() : gutil.noop())
 	    .pipe(gulp.dest('public/build/stylesheets'));
 });
 
@@ -75,10 +89,10 @@ gulp.task('clean', function(callback) {
 gulp.task('scripts', ['clean'], function() {
 	// Minify and copy all JavaScript (except vendor scripts) with sourcemaps all the way down
 	return gulp.src(paths.scriptsFrontend)
-		.pipe(!isProduction ? sourcemaps.init() : gutil.noop())
+		.pipe((environment !== 'production') ? sourcemaps.init() : gutil.noop())
 		.pipe(uglify())
 		.pipe(concat('all.min.js'))
-		.pipe(!isProduction ? sourcemaps.write() : gutil.noop())
+		.pipe((environment !== 'production') ? sourcemaps.write() : gutil.noop())
 		.pipe(gulp.dest('public/build/scripts'));
 });
 
@@ -121,20 +135,32 @@ gulp.task('test-backend', function() {
     });
 });
 
+// Setup end to end tests
+gulp.task('setup-e2e-tests', function()  {
+	if (environment === 'testing') {
+		process.env.NODE_ENV = 'testing';
+		gulp.start('nodemon');
+	}
+});
+
 // Run the end-to-end tests
-gulp.task('test-e2e', function(callback) {
+gulp.task('test-e2e', ['setup-e2e-tests'], function() {
+	 	 
 	gulp.src(paths.testsE2E)
 		.pipe(protractor({
 			configFile: __dirname + '/test/e2e-tests/protractor.conf.js',
 			args: []
 		}))
 		.on('error', function(e) { throw e; })
-		.on('end', callback);
+		.once('end', function () {
+	      process.exit();
+	    });
+		
 });
 
 // Downloads the selenium webdriver
 gulp.task('webdriver-update', webdriverUpdate);
 
-gulp.task('default', ['watch', 'scripts', 'minify-css', 'nodemon']);
+gulp.task('default', ['development', 'watch', 'scripts', 'minify-css', 'nodemon']);
 
 gulp.task('release', ['scripts', 'minify-css']);

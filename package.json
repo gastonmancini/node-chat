@@ -47,7 +47,7 @@
 		"prestart": "npm install",
 		"start": "node server.js",
 		
-		"postinstall": "gulp release --production",
+		"postinstall": "gulp release",
 		
 		"pretest-frontend": "npm install",
 		"test-frontend": "gulp test-frontend",

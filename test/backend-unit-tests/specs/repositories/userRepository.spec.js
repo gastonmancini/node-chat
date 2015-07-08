@@ -9,7 +9,7 @@ var encryption = nodechat.foundation.encryption;
 
 describe('Repositories: UserRepository', function () {
 
-	var user = { user: { email: 'email@test.com', username: 'username', password: 'password' } };
+	var user = { user: { email: 'email@test.com', username: 'username', password: 'password', verified: true, verificationToken: 'verificationToken' } };
 
 	before(function (done) {
 

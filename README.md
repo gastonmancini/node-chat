@@ -154,7 +154,7 @@ This will download and install the latest version of the stand-alone WebDriver t
 Once you have ensured that the development web server hosting our application is up and running and WebDriver is updated, you can run the end-to-end tests using the supplied npm script:
 
 ```
-gulp test-e2e
+gulp testing test-e2e
 ```
 
 This script will execute the end-to-end tests against the application being hosted on the development server.

@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - 0.12
 env:
-  - NODE_ENV=test
+  - NODE_ENV=production_testing
 before_script:
   - export DISPLAY=:99.0
   - npm install -g gulp

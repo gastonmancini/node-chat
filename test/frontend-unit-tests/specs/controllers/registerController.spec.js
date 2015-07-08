@@ -50,16 +50,7 @@ describe('Controller: RegisterController', function () {
 
   });
 
-  it('should set the current user and redirect to the chat', function () {
-
-    var currentUser;
-    var params = { user: { _id: 1, email: 'test@email.com', username: 'testUsername', token: 'testAuthToken' } };
-
-    scope.setCurrentUser = function (id, email, username) {
-      currentUser = { _id: id, email: email, username: username };
-    };
-
-    spyOn(AuthService, 'parseToken').and.returnValue(params);
+  it('should redirect to the login', function () {
 
     spyOn(UserService, 'register').and.callFake(function () {
 
@@ -76,13 +67,8 @@ describe('Controller: RegisterController', function () {
 
     scope.register(scope.user);
     
-    // The user is set
-    expect(currentUser._id).toBe(params.user._id);
-    expect(currentUser.email).toBe(params.user.email);
-    expect(currentUser.username).toBe(params.user.username);
-   
-    // Redirects to the chat 
-    expect(location.path).toHaveBeenCalledWith('/chat');
+    // Redirects to the login 
+    expect(location.path).toHaveBeenCalledWith('/login/verify_account');
 
   });
 });

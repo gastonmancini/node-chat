@@ -28,40 +28,44 @@ describe('Register', function () {
 
 	});
 
-	it('should show an error if the email is not set', function () {
+	it('should not allow to submit if the email is not set', function () {
 
 		element(by.model('user.password')).sendKeys('e2epassword');
 		element(by.model('user.username')).sendKeys('e2e_user');
 
 		submitButton.click();
 
-		expect(element.all(by.css('.error p')).
-			first().getText()).toBe("Bad request.");
+		currentUrl = browser.getCurrentUrl();
+		expect(currentUrl).toEqual('http://localhost:3000/#/register');
 	});
-
-	it('should show an error if the username is not set', function () {
+	
+	it('should not allow to submit if the username is not set', function () {
 
 		element(by.model('user.email')).sendKeys('e2e@test.com');
 		element(by.model('user.password')).sendKeys('e2epassword');
 
 		submitButton.click();
 
-		expect(element.all(by.css('.error p')).
-			first().getText()).toBe("Bad request.");
+		currentUrl = browser.getCurrentUrl();
+		expect(currentUrl).toEqual('http://localhost:3000/#/register');
 	});
 
-	it('should show an error if the password is not set', function () {
+	it('should not allow to submit if the password is not set', function () {
 
 		element(by.model('user.email')).sendKeys('e2e@test.com');
 		element(by.model('user.username')).sendKeys('e2e_user');
 
 		submitButton.click();
 
-		expect(element.all(by.css('.error p')).
-			first().getText()).toBe("Bad request.");
+		currentUrl = browser.getCurrentUrl();
+		expect(currentUrl).toEqual('http://localhost:3000/#/register');
 	});
 
 	it('should successfully go to the login page', function () {
+
+		element(by.model('user.email')).sendKeys('e2e@test.com');
+		element(by.model('user.password')).sendKeys('e2epassword');
+		element(by.model('user.username')).sendKeys('e2e_user');
 
 		var createAccountButton = element(by.css('.login-button'));
 		createAccountButton.click();
