@@ -20,6 +20,7 @@ module.exports = function (app) {
   app.nodechat.dependencies.jwt = require('jsonwebtoken');
   app.nodechat.dependencies.mongoose = require('mongoose');
   app.nodechat.dependencies.nodemailer = require('nodemailer');
+  app.nodechat.dependencies.nodemailer.transport = require('nodemailer-mandrill-transport');
   
   // Register configuration
   app.nodechat.config = require(libPath + '/config/config');
@@ -33,10 +34,10 @@ module.exports = function (app) {
   
   // Register the foundation services
   app.nodechat.foundation.encryption = require(libPath + '/foundation/encryption')(app.nodechat.dependencies.bCrypt);
-  app.nodechat.foundation.mailer = require(libPath + '/foundation/mailer')(app.nodechat.config, app.nodechat.dependencies.nodemailer);
+  app.nodechat.foundation.mailer = require(libPath + '/foundation/mailer')(app.nodechat.config, app.nodechat.dependencies.nodemailer.transport, app.nodechat.dependencies.nodemailer);
   
   // Setup mailer
-  app.nodechat.foundation.mailer.setup(app.nodechat.config.smtpService, app.nodechat.config.smtpUser, app.nodechat.config.smtpPassword,
+  app.nodechat.foundation.mailer.setupWithApiKey(app.nodechat.config.smtpApiKey,
   	function (err) {
          console.log("An error ocurred creating the SMTP transport. Error: " + err);
   });
