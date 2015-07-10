@@ -74,6 +74,12 @@ You should find that you have a new folder in your project:
 
 * `node_modules` - contains the npm packages for the tools we need
 
+### Config
+
+You will need to setup the SMTP and [NewRelic](http://newrelic.com/) account before starting.
+Take a look to the settings.json and the newrelic.js files. For the mailer you can create a free account in [MandrilApp](https://mandrillapp.com/). 
+
+
 ### Run the Application
 
 The simplest way to start
