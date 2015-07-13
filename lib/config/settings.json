@@ -1,13 +1,14 @@
 {
   "development": {
-    "secret_auth_key": "a19ea622182c63ddc19bb22cde982b82",
-    "database_connection": "mongodb://localhost:27017/nodechat",
-    "smtp_service": "Gmail",
+    "secret_auth_key": "",
+    "database_connection": "",
+    "smtp_service": "",
     "smtp_user": "",
     "smtp_password": "",
     "smtp_api_key": "",
     "default_from_email_address": "NodeChat <noreply@mail.nodechat.com>",
-    "base_url": "http://localhost:3000/#"
+    "base_url": "http://localhost:3000/#",
+    "logger_access_token": ""
   },
   "production": {
     "secret_auth_key": "",
@@ -17,17 +18,19 @@
     "smtp_password": "",
     "smtp_api_key": "",
     "default_from_email_address": "NodeChat <noreply@mail.nodechat.com>",
-    "base_url": "http://chat-node-tio.herokuapp.com/#"
+    "base_url": "http://chat-node-tio.herokuapp.com/#",
+    "logger_access_token": ""
   },
   "testing": {
-    "secret_auth_key": "a19ea622182c63ddc19bb22cde982b82",
-    "database_connection": "mongodb://localhost:27017/nodechattest",
+    "secret_auth_key": "",
+    "database_connection": "",
     "smtp_service": "",
     "smtp_user": "",
     "smtp_password": "",
     "smtp_api_key": "",
     "default_from_email_address": "NodeChat <noreply@mail.nodechat.com>",
-    "base_url": "http://localhost:3000/#"
+    "base_url": "http://localhost:3000/#",
+    "logger_access_token": ""
   },
   "production_testing": {
     "secret_auth_key": "",
@@ -37,6 +40,7 @@
     "smtp_password": "",
     "smtp_api_key": "",
     "default_from_email_address": "NodeChat <noreply@mail.nodechat.com>",
-    "base_url": "http://localhost:3000/#"
+    "base_url": "http://localhost:3000/#",
+    "logger_access_token": ""
   }
 }
