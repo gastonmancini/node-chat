@@ -27,11 +27,11 @@ describe('Services: ChatService', function () {
 				params: ''
 			}, {
 					send: function (code) {
-						code.should.eql(404);
+						code.should.eql(400);
 						return this;
 					},
 					json: function (response) {
-						response.should.eql({ message: 'ChatRoom not found.' });
+						response.should.eql({ message: 'Bad request.' });
 						done();
 					}
 				});

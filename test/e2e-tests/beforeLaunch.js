@@ -18,6 +18,7 @@ module.exports = function (app) {
   // Register third-party modules
   app.nodechat.dependencies.bCrypt = require('bcrypt-nodejs');
   app.nodechat.dependencies.jwt = require('jsonwebtoken');
+  app.nodechat.dependencies.logentries = require('le_node');
   app.nodechat.dependencies.mongoose = require('mongoose');
   app.nodechat.dependencies.nodemailer = require('nodemailer');
   app.nodechat.dependencies.nodemailer.transport = require('nodemailer-mandrill-transport');
@@ -28,11 +29,18 @@ module.exports = function (app) {
   // Register the foundation services
   app.nodechat.foundation.encryption = require(libPath + '/foundation/encryption')(app.nodechat.dependencies.bCrypt);
   app.nodechat.foundation.mailer = require(libPath + '/foundation/mailer')(app.nodechat.config, app.nodechat.dependencies.nodemailer.transport, app.nodechat.dependencies.nodemailer);
+  app.nodechat.foundation.logger = require(libPath + '/foundation/logger')(app.nodechat.dependencies.logentries);
+  
+  // Setup logger
+  app.nodechat.foundation.logger.setupWithAccessToken(app.nodechat.config.loggerAccessToken,
+  	function (err) {
+         app.nodechat.foundation.logger.error("An error ocurred creating the logger service. Error: " + err);
+  });
   
   // Setup mailer
   app.nodechat.foundation.mailer.setupWithApiKey(app.nodechat.config.smtpApiKey,
   	function (err) {
-         console.log("An error ocurred creating the SMTP transport. Error: " + err);
+         app.nodechat.foundation.logger.error("An error ocurred creating the SMTP transport. Error: " + err);
   });
   
   // Register the entities...
@@ -52,10 +60,10 @@ module.exports = function (app) {
   var db = app.nodechat.dependencies.mongoose.connect(app.nodechat.config.db, function (err) {
     
     if (err) {
-      console.log('Error connecting to the database' + app.nodechat.config.db + '. Error: ' + err);
+      app.nodechat.foundation.logger.error('Error connecting to the database' + app.nodechat.config.db + '. Error: ' + err);
     }
 
-    console.log('Successfully connected to: ' + app.nodechat.config.db);
+    app.nodechat.foundation.logger.info('Successfully connected to: ' + app.nodechat.config.db);
 
     app.nodechat.repositories.userRepository.create('e2e_user', 'e2e@test.com', 'e2epassword', true, 'validationToken', null); 
 
